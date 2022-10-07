@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
 
-export default interface TuitControllerI {
+export default interface TuitController {
     findAllTuits(req: Request, res: Response): void;
     findTuitById(req: Request, res: Response): void;
     findTuitsByUser(req: Request, res: Response): void;

@@ -1,7 +1,6 @@
 import AccountType from "./AccountType";
 import MaritalStatus from "./MaritalStatus";
 import Location from "./Location";
-import e from "express";
 
 export default class User {
     private id: string;
@@ -29,10 +28,10 @@ export default class User {
         this.email = email;
     }
 
-    // get uName() { return this.username; }
-    // get fName() { return this.firstName; }
-    // get pass() { return this.password; }
-    //
-    // set uName(username: string) { this.username = username; }
-    // set pass(password: string) { this.password = password; }
+    get uName() { return this.username; }
+    get fName() { return this.firstName; }
+    get pass() { return this.password; }
+
+    set uName(username: string) { this.username = username; }
+    set pass(password: string) { this.password = password; }
 }

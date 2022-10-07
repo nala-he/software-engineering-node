@@ -13,8 +13,7 @@ export default class Tuit {
         this.postedBy = postedBy;
     }
 
-    // set newTuitAuthor(user: User) { this.postedBy = user; }
-    // get tuitAuthor(): User | null { return this.postedBy; }
-    // get tuitContent(): string { return this.tuit; }
-
+    set newTuitAuthor(user: User) { this.postedBy = user; }
+    get tuitAuthor(): User | null { return this.postedBy; }
+    get tuitContent(): string { return this.tuit; }
 }

@@ -1,12 +1,12 @@
 import {Request, Response, Express} from "express";
-import TuitDaoI from "../interfaces/TuitDaoI";
-import TuitControllerI from "../interfaces/TuitControllerI";
+import TuitDao from "../interfaces/TuitDao";
+import TuitControllerI from "../interfaces/TuitController";
 
 export default class TuitController implements TuitControllerI {
     private static tuitController: TuitController | null = null;
-    private static tuitDao: TuitDaoI;
+    private static tuitDao: TuitDao;
 
-    public static getInstance = (app: Express, tuitDao: TuitDaoI): TuitController => {
+    public static getInstance = (app: Express, tuitDao: TuitDao): TuitController => {
         if (TuitController.tuitController === null) {
             TuitController.tuitController = new TuitController();
         }

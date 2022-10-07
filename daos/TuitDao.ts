@@ -1,7 +1,6 @@
 import Tuit from "../models/Tuit";
 import TuitModel from "../mongoose/TuitModel";
-import TuitDaoI from "../interfaces/TuitDaoI";
-import User from "../models/User";
+import TuitDaoI from "../interfaces/TuitDao";
 
 export default class TuitDao implements TuitDaoI {
     private static tuitDao: TuitDao | null = null;
@@ -15,7 +14,7 @@ export default class TuitDao implements TuitDaoI {
     private constructor() {}
 
     public async findAllTuits(): Promise<Tuit[]> {
-        const tuitMongooseModels = await TuitModel.find().populate("postedBy", "username");
+        const tuitMongooseModels = await TuitModel.find().populate("postedBy");
         const tuitModels = tuitMongooseModels
             .map((tuitMongooseModels) => {
                 return new Tuit(
@@ -30,7 +29,7 @@ export default class TuitDao implements TuitDaoI {
 
     public async findTuitsByUser(uid: string): Promise<Tuit[]> {
         const tuitMongooseModels = await TuitModel.find({postedBy: uid})
-            .populate("postedBy", "username");
+            .populate("postedBy");
         const tuitModels = tuitMongooseModels
             .map((tuitMongooseModels) => {
                 return new Tuit(
@@ -44,7 +43,7 @@ export default class TuitDao implements TuitDaoI {
     }
 
     public async findTuitById(tid: string): Promise<Tuit> {
-        const tuitMongooseModel = await TuitModel.findById(tid).populate("postedBy", "username").exec();
+        const tuitMongooseModel = await TuitModel.findById(tid).populate("postedBy").exec();
         return new Tuit(
             tuitMongooseModel?._id.toString() ?? '',
             tuitMongooseModel?.tuit ?? '',
