@@ -1,5 +1,16 @@
+/**
+ * @file Declares Tuit data type
+ */
 import User from "./User"
 
+
+/**
+ * @typedef Tuit Represents a tuit
+ * @property {string} id Tuit id
+ * @property {string} tuit Tuit content
+ * @property {Date} postedOn Posted date
+ * @property {User} postedBy Posted user
+ */
 export default class Tuit {
     private id: string;
     private tuit: string;
@@ -12,8 +23,4 @@ export default class Tuit {
         this.postedOn = postedOn;
         this.postedBy = postedBy;
     }
-
-    set newTuitAuthor(user: User) { this.postedBy = user; }
-    get tuitAuthor(): User | null { return this.postedBy; }
-    get tuitContent(): string { return this.tuit; }
 }

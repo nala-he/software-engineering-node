@@ -1,7 +1,26 @@
+/**
+ * @file Declares User data type
+ */
 import AccountType from "./AccountType";
 import MaritalStatus from "./MaritalStatus";
 import Location from "./Location";
 
+/**
+ * @typedef User Represents a tuit user
+ * @property {string} id User id
+ * @property {string} username User name
+ * @property {string} firstName User firstname
+ * @property {string} lastName User lastname
+ * @property {string} email User email
+ * @property {string} profilePhoto Profile photo
+ * @property {string} headerImage Header image
+ * @property {AccountType} accountType Account type
+ * @property {MaritalStatus} maritalStatus Marital status
+ * @property {string} biography Bio
+ * @property {string} dateOfBirth DOB
+ * @property {Date} joined Joined date
+ * @property {Location} location Location
+ */
 export default class User {
     private id: string;
     private username: string = '';
@@ -27,11 +46,4 @@ export default class User {
         this.lastName = lastName;
         this.email = email;
     }
-
-    get uName() { return this.username; }
-    get fName() { return this.firstName; }
-    get pass() { return this.password; }
-
-    set uName(username: string) { this.username = username; }
-    set pass(password: string) { this.password = password; }
 }

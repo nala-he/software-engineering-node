@@ -1,7 +1,8 @@
 import User from "../models/User";
-import {promises} from "dns";
-
-export default interface UserDao {
+/**
+ * @file Declares API for Users related data access object methods
+ */
+export default interface UserDaoI {
     findAllUsers(): Promise<User[]>;
     findUserById(uid: string): Promise<any>;
     createUser(user: User): Promise<User>;
