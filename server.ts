@@ -39,6 +39,10 @@ app.get('/env', (req, res) =>
     res.send(process.env));
 app.get('/username', (req, res) =>
     res.send(process.env.username));
+app.get('/DB_USERNAME', (req, res) =>
+    res.send(process.env.DB_USERNAME));
+app.get('/DB_PASSWORD', (req, res) =>
+    res.send(process.env.DB_PASSWORD));
 
 const HOST = "cluster0.kndb1tp.mongodb.net";
 const DB_NAME = "fse";
