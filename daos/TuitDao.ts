@@ -42,7 +42,7 @@ export default class TuitDao implements TuitDaoI {
      */
     findTuitsByUser = async (uid: string): Promise<Tuit[]> =>
         TuitModel.find({postedBy: uid})
-            .populate("postedBy")
+            .populate("postedBy", "username")
             .exec();
 
     /**
@@ -71,10 +71,7 @@ export default class TuitDao implements TuitDaoI {
      */
     public async updateTuit(tid: string, tuit: any): Promise<any> {
         return TuitModel.updateOne({_id: tid},
-            {$set: {
-                tuit: tuit.tuit,
-                postedBy: tuit.postedBy
-            }});
+            {$set: tuit});
     }
 
     /**

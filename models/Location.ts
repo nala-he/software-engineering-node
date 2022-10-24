@@ -1,3 +1,9 @@
+/**
+ * @file Declares Location data type
+ * @typedef {Location} Location Represents a location
+ * @property {number} latitude Latitude
+ * @property {number} longitude Longitude
+ */
 export default class Location {
     private latitude: number = 0.0;
     private longitude: number = 0.0;
@@ -6,9 +12,4 @@ export default class Location {
         this.latitude = latitude;
         this.longitude = longitude;
     }
-
-    get latiNum() { return this.latitude; }
-    get longiNum() { return this.longitude; }
-    set latiNum(latitude: number) { this.latitude = latitude; }
-    set longiNum(longitude: number) { this.longitude = longitude; }
 };

@@ -1,1 +1,1 @@
-{"version":3,"file":"Bookmark.js","sourceRoot":"","sources":["../../models/Bookmark.ts"],"names":[],"mappings":";AAAA;;;GAGG;;AAWF,CAAC"}
+{"version":3,"file":"Bookmark.js","sourceRoot":"","sources":["../../models/Bookmark.ts"],"names":[],"mappings":";AAAA;;;GAGG;;AAEH;;;;;GAKG;AACH,MAAqB,QAAQ;IAIzB,YAAY,UAAkB,EAAE,QAAgB;QAC5C,IAAI,CAAC,UAAU,GAAG,UAAU,CAAC;QAC7B,IAAI,CAAC,QAAQ,GAAG,QAAQ,CAAC;IAC7B,CAAC;CACJ;AARD,2BAQC;AAAA,CAAC"}

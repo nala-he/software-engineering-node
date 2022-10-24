@@ -32,8 +32,10 @@ require('dotenv').config();
 
 // build the connection string
 const PROTOCOL = "mongodb+srv";
-const DB_USERNAME = process.env.DB_USERNAME;
-const DB_PASSWORD = process.env.DB_PASSWORD;
+// const DB_USERNAME = process.env.DB_USERNAME;
+// const DB_PASSWORD = process.env.DB_PASSWORD;
+const DB_USERNAME = "fse-nala";
+const DB_PASSWORD = "H6GVmTUTH5KEZNS0";
 
 const HOST = "cluster0.kndb1tp.mongodb.net";
 const DB_NAME = "fse";
@@ -58,7 +60,7 @@ app.get('/hello', (req: Request, res: Response) =>
 
 /**
  * Start a server listening at port 4000 locally
- * but use environment variable PORT on Heroku if available.
+ * but use environment variable PORT on AWS if available.
  */
 const PORT = 4000;
 app.listen(process.env.PORT || PORT);

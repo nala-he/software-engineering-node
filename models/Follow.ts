@@ -9,7 +9,11 @@
  * @property {string} following ID of user that a user is following
  * @property {string} followedBy ID of user that a user is followed by
  */
-export default interface Follow {
-    following: string,
-    followedBy: string
+export default class Follow {
+    private following: string;
+    private followedBy: string;
+    constructor(following: string, followedBy: string) {
+        this.following = following;
+        this.followedBy = followedBy;
+    }
 };

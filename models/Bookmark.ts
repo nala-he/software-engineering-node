@@ -9,7 +9,12 @@
  * @property {string} markedTuit ID of user who bookmarked
  * @property {string} markedBy ID of tuit that a user bookmarked
  */
-export default interface Bookmark {
-    markedTuit: string,
-    markedBy: string,
+export default class Bookmark {
+    private markedTuit: string;
+    private markedBy: string;
+
+    constructor(markedTuit: string, markedBy: string) {
+        this.markedTuit = markedTuit;
+        this.markedBy = markedBy;
+    }
 };

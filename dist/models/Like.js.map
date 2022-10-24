@@ -1,1 +1,1 @@
-{"version":3,"file":"Like.js","sourceRoot":"","sources":["../../models/Like.ts"],"names":[],"mappings":";;AAgBC,CAAC"}
+{"version":3,"file":"Like.js","sourceRoot":"","sources":["../../models/Like.ts"],"names":[],"mappings":";;AAOA;;;;;GAKG;AACH,MAAqB,IAAI;IAIrB,YAAY,IAAU,EAAE,OAAa;QACjC,IAAI,CAAC,IAAI,GAAG,IAAI,CAAC;QACjB,IAAI,CAAC,OAAO,GAAG,OAAO,CAAC;IAC3B,CAAC;CACJ;AARD,uBAQC;AAAA,CAAC"}

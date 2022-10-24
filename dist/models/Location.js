@@ -1,5 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * @file Declares Location data type
+ * @typedef {Location} Location Represents a location
+ * @property {number} latitude Latitude
+ * @property {number} longitude Longitude
+ */
 class Location {
     constructor(latitude, longitude) {
         this.latitude = 0.0;
@@ -7,10 +13,6 @@ class Location {
         this.latitude = latitude;
         this.longitude = longitude;
     }
-    get latiNum() { return this.latitude; }
-    get longiNum() { return this.longitude; }
-    set latiNum(latitude) { this.latitude = latitude; }
-    set longiNum(longitude) { this.longitude = longitude; }
 }
 exports.default = Location;
 ;
