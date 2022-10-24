@@ -59,14 +59,18 @@ export default class MessageController implements MessageControllerI {
 
     /**
      * @param {Request} req Represents request from client, including body containing the JSON
-     * object for the new message to be inserted to the database
+     * object for the new message to be inserted to the database and path parameter sender and
+     * receiver identifying the primary key of the sender user and receiver user
      * @param {Response} res Represents response to client, including the
      * body formatted as JSON containing the new message that was inserted in the
      * database
      */
     userSendsMessage = async (req: Request, res: Response) =>
-        MessageController.messageDao.userSendsMessage(req.body)
-            .then(message => res.json(message));
+        MessageController.messageDao.userSendsMessage(
+            req.params.sender,
+            req.params.receiver,
+            req.body
+        ).then(message => res.json(message));
 
     /**
      * Retrieves all sent messages from the database for a sender user and returns

@@ -31,16 +31,10 @@ export default class MessageDao implements MessageDaoI {
      * @param {Message} message Message
      * @returns Promise To be notified when new message is inserted into the database
      */
-    userSendsMessage = async (message: Message): Promise<Message> => {
-        const messageMongooseModel = await MessageModel.create(message);
-        return new Message(
-            messageMongooseModel?._id.toString() ?? '',
-            messageMongooseModel?.message ?? '',
-            new Date(messageMongooseModel?.postedOn ?? (new Date())),
-            messageMongooseModel?.sentBy ?? '',
-            messageMongooseModel?.sentTo ?? ''
-        );
-    }
+    userSendsMessage = async (sentBy: string, sentTo: string, message: Message): Promise<Message> =>
+        MessageModel.create({...message, sentBy, sentTo});
+
+
 
     /**
      * Uses MessageModel to retrieve all sent message documents from messages collection
