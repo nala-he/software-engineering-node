@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
 
 /**
  * @file Implements mongoose schema in the likes collection

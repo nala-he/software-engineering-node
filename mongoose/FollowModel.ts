@@ -2,7 +2,7 @@
  * @file Implements mongoose model to CRUD
  * documents in the follows collection
  */
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
 import followSchema from "./FollowSchema";
 
 const followModel = mongoose.model(

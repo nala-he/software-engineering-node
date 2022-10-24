@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
 import bookmarkSchema from "./BookmarkSchema";
 /**
  * @file Implements mongoose model to CRUD

@@ -15,18 +15,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Connects to a remote MongoDB instance hosted on the Atlas cloud database
  * service
  */
-const express_1 = require("express");
-const mongoose_1 = require("mongoose");
+const express = require("express");
+// import mongoose from "mongoose";
+const mongoose = require('mongoose');
 const UserController_1 = require("./controllers/UserController");
 const TuitController_1 = require("./controllers/TuitController");
 const LikeController_1 = require("./controllers/LikeController");
 const FollowController_1 = require("./controllers/FollowController");
 const BookmarkController_1 = require("./controllers/BookmarkController");
 const MessageController_1 = require("./controllers/MessageController");
-var cors = require('cors');
-const app = (0, express_1.default)();
+const cors = require('cors');
+const app = express();
 app.use(cors());
-app.use(express_1.default.json());
+app.use(express.json());
 require('dotenv').config();
 // build the connection string
 const PROTOCOL = "mongodb+srv";
@@ -37,11 +38,11 @@ const DB_NAME = "fse";
 const DB_QUERY = "retryWrites=true&w=majority";
 const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}`;
 // connect to the database
-mongoose_1.default.connect(connectionString);
+mongoose.connect(connectionString);
 // mongoose.connect('mongodb://localhost:27017/tuiter', options);
 // mongoose.connect("mongodb+srv://fse-nala:H6GVmTUTH5KEZNS0@cluster0.kndb1tp.mongodb.net/" +
 //     "fse?retryWrites=true&w=majority");
-// create RESTful Web service API
+//create RESTful Web service API
 const userController = UserController_1.default.getInstance(app);
 const tuitController = TuitController_1.default.getInstance(app);
 const likeController = LikeController_1.default.getInstance(app);

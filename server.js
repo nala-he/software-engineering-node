@@ -13,15 +13,16 @@
  * Connects to a remote MongoDB instance hosted on the Atlas cloud database
  * service
  */
-import express from "express";
-import mongoose from "mongoose";
+import * as express from "express";
+// import mongoose from "mongoose";
+const mongoose = require('mongoose');
 import UserController from "./controllers/UserController";
 import TuitController from "./controllers/TuitController";
 import LikeController from "./controllers/LikeController";
 import FollowController from "./controllers/FollowController";
 import BookmarkController from "./controllers/BookmarkController";
 import MessageController from "./controllers/MessageController";
-var cors = require('cors');
+const cors = require('cors');
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -39,7 +40,7 @@ mongoose.connect(connectionString);
 // mongoose.connect('mongodb://localhost:27017/tuiter', options);
 // mongoose.connect("mongodb+srv://fse-nala:H6GVmTUTH5KEZNS0@cluster0.kndb1tp.mongodb.net/" +
 //     "fse?retryWrites=true&w=majority");
-// create RESTful Web service API
+//create RESTful Web service API
 const userController = UserController.getInstance(app);
 const tuitController = TuitController.getInstance(app);
 const likeController = LikeController.getInstance(app);
