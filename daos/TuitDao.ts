@@ -30,54 +30,29 @@ export default class TuitDao implements TuitDaoI {
      * @returns Promise To be notified when the tuits are retrieved from
      * database
      */
-    public async findAllTuits(): Promise<Tuit[]> {
-        const tuitMongooseModels = await TuitModel.find().populate("postedBy");
-        const tuitModels = tuitMongooseModels
-            .map((tuitMongooseModels) => {
-                return new Tuit(
-                    tuitMongooseModels?._id.toString() ?? '',
-                    tuitMongooseModels?.tuit ?? '',
-                    new Date(tuitMongooseModels?.postedOn ?? (new Date())),
-                    tuitMongooseModels?.postedBy
-                );
-            });
-        return tuitModels;
-    }
+    findAllTuits = async (): Promise<Tuit[]> =>
+        TuitModel.find()
+            .populate("postedBy", "username")
+            .exec();
 
     /**
      * Uses TuitModel to retrieve tuit documents from tuits collection based on a
      * given user id
      * @returns Promise To be notified when the tuits are retrieved from database
      */
-    public async findTuitsByUser(uid: string): Promise<Tuit[]> {
-        const tuitMongooseModels = await TuitModel.find({postedBy: uid})
-            .populate("postedBy");
-        const tuitModels = tuitMongooseModels
-            .map((tuitMongooseModels) => {
-                return new Tuit(
-                    tuitMongooseModels?._id.toString() ?? '',
-                    tuitMongooseModels?.tuit ?? '',
-                    new Date(tuitMongooseModels?.postedOn ?? (new Date())),
-                    tuitMongooseModels?.postedBy
-                );
-            });
-        return tuitModels;
-    }
+    findTuitsByUser = async (uid: string): Promise<Tuit[]> =>
+        TuitModel.find({postedBy: uid})
+            .populate("postedBy")
+            .exec();
 
     /**
      * Uses TuitModel to retrieve a tuit document from tuits collection based on a
      * given tuit id
      * @returns Promise To be notified when the tuit is retrieved from database
      */
-    public async findTuitById(tid: string): Promise<Tuit> {
-        const tuitMongooseModel = await TuitModel.findById(tid).populate("postedBy").exec();
-        return new Tuit(
-            tuitMongooseModel?._id.toString() ?? '',
-            tuitMongooseModel?.tuit ?? '',
-            new Date(tuitMongooseModel?.postedOn ?? (new Date())),
-            tuitMongooseModel?.postedBy
-        );
-    }
+    findTuitById = async (tid: string): Promise<Tuit> =>
+        TuitModel.findById(tid)
+            .exec();
 
     /**
      * Inserts tuit instance into the database
