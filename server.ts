@@ -13,7 +13,8 @@
  * Connects to a remote MongoDB instance hosted on the Atlas cloud database
  * service
  */
-import express, {Request, Response} from 'express';
+import express from "express";
+import {Request, Response} from "express";
 import mongoose from "mongoose";
 import UserController from "./controllers/UserController";
 import TuitController from "./controllers/TuitController";
@@ -39,7 +40,7 @@ const DB_NAME = "fse";
 const DB_QUERY = "retryWrites=true&w=majority";
 const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}`;
 // connect to the database
-mongoose.connect(connectionString);
+mongoose.connect(connectionString)
 
 // mongoose.connect('mongodb://localhost:27017/tuiter', options);
 // mongoose.connect("mongodb+srv://fse-nala:H6GVmTUTH5KEZNS0@cluster0.kndb1tp.mongodb.net/" +

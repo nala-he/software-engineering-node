@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @file Implements an Express Node HTTP server. Declares RESTful Web services
  * enabling CRUD operations on the following resources:
@@ -13,18 +15,18 @@
  * Connects to a remote MongoDB instance hosted on the Atlas cloud database
  * service
  */
-import express from "express";
-import mongoose from "mongoose";
-import UserController from "./controllers/UserController";
-import TuitController from "./controllers/TuitController";
-import LikeController from "./controllers/LikeController";
-import FollowController from "./controllers/FollowController";
-import BookmarkController from "./controllers/BookmarkController";
-import MessageController from "./controllers/MessageController";
+const express_1 = require("express");
+const mongoose_1 = require("mongoose");
+const UserController_1 = require("./controllers/UserController");
+const TuitController_1 = require("./controllers/TuitController");
+const LikeController_1 = require("./controllers/LikeController");
+const FollowController_1 = require("./controllers/FollowController");
+const BookmarkController_1 = require("./controllers/BookmarkController");
+const MessageController_1 = require("./controllers/MessageController");
 var cors = require('cors');
-const app = express();
+const app = (0, express_1.default)();
 app.use(cors());
-app.use(express.json());
+app.use(express_1.default.json());
 require('dotenv').config();
 // build the connection string
 const PROTOCOL = "mongodb+srv";
@@ -35,17 +37,17 @@ const DB_NAME = "fse";
 const DB_QUERY = "retryWrites=true&w=majority";
 const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}`;
 // connect to the database
-mongoose.connect(connectionString);
+mongoose_1.default.connect(connectionString);
 // mongoose.connect('mongodb://localhost:27017/tuiter', options);
 // mongoose.connect("mongodb+srv://fse-nala:H6GVmTUTH5KEZNS0@cluster0.kndb1tp.mongodb.net/" +
 //     "fse?retryWrites=true&w=majority");
 // create RESTful Web service API
-const userController = UserController.getInstance(app);
-const tuitController = TuitController.getInstance(app);
-const likeController = LikeController.getInstance(app);
-const followController = FollowController.getInstance(app);
-const bookmarkController = BookmarkController.getInstance(app);
-const messageController = MessageController.getInstance(app);
+const userController = UserController_1.default.getInstance(app);
+const tuitController = TuitController_1.default.getInstance(app);
+const likeController = LikeController_1.default.getInstance(app);
+const followController = FollowController_1.default.getInstance(app);
+const bookmarkController = BookmarkController_1.default.getInstance(app);
+const messageController = MessageController_1.default.getInstance(app);
 app.get('/', (req, res) => res.send('Welcome to Foundation of Software Engineering!'));
 app.get('/hello', (req, res) => res.send('Welcome to Foundation of Software Engineering!'));
 /**
@@ -54,3 +56,4 @@ app.get('/hello', (req, res) => res.send('Welcome to Foundation of Software Engi
  */
 const PORT = 4000;
 app.listen(process.env.PORT || PORT);
+//# sourceMappingURL=server.js.map
