@@ -6,7 +6,7 @@ import MaritalStatus from "./MaritalStatus";
 import Location from "./Location";
 
 /**
- * @typedef User Represents a tuit user
+ * @typedef {User} User Represents a tuit user
  * @property {string} id User id
  * @property {string} username User name
  * @property {string} firstName User firstname

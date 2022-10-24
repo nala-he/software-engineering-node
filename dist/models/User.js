@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const AccountType_1 = require("./AccountType");
 const MaritalStatus_1 = require("./MaritalStatus");
 /**
- * @typedef User Represents a tuit user
+ * @typedef {User} User Represents a tuit user
  * @property {string} id User id
  * @property {string} username User name
  * @property {string} firstName User firstname

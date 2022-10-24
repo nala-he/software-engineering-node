@@ -2,7 +2,7 @@
  * @file Declares Message data type
  */
 /**
- * @typedef Message Represents a message
+ * @typedef {Message} Message Represents a message
  * @property {string} id Message id
  * @property {string} message Message content
  * @property {Date} sentOn Sent date

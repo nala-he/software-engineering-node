@@ -16,8 +16,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * service
  */
 const express = require("express");
-// import mongoose from "mongoose";
-const mongoose = require('mongoose');
+const mongoose_1 = require("mongoose");
 const UserController_1 = require("./controllers/UserController");
 const TuitController_1 = require("./controllers/TuitController");
 const LikeController_1 = require("./controllers/LikeController");
@@ -33,12 +32,14 @@ require('dotenv').config();
 const PROTOCOL = "mongodb+srv";
 const DB_USERNAME = process.env.DB_USERNAME;
 const DB_PASSWORD = process.env.DB_PASSWORD;
+app.get('/env', (req, res) => res.send(process.env));
+app.get('/username', (req, res) => res.send(process.env.username));
 const HOST = "cluster0.kndb1tp.mongodb.net";
 const DB_NAME = "fse";
 const DB_QUERY = "retryWrites=true&w=majority";
 const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}`;
 // connect to the database
-mongoose.connect(connectionString);
+mongoose_1.default.connect(connectionString);
 //create RESTful Web service API
 const userController = UserController_1.default.getInstance(app);
 const tuitController = TuitController_1.default.getInstance(app);
@@ -47,7 +48,7 @@ const followController = FollowController_1.default.getInstance(app);
 const bookmarkController = BookmarkController_1.default.getInstance(app);
 const messageController = MessageController_1.default.getInstance(app);
 app.get('/', (req, res) => res.send('Welcome to Foundation of Software Engineering!'));
-app.get('/hello', (req, res) => res.send('Welcome to Foundation of Software Engineering!'));
+app.get('/hello', (req, res) => res.send('Hello World!'));
 /**
  * Start a server listening at port 4000 locally
  * but use environment variable PORT on Heroku if available.

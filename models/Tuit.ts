@@ -5,7 +5,7 @@ import User from "./User"
 
 
 /**
- * @typedef Tuit Represents a tuit
+ * @typedef {Tuit} Tuit Represents a tuit
  * @property {string} id Tuit id
  * @property {string} tuit Tuit content
  * @property {Date} postedOn Posted date

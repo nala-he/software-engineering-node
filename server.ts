@@ -15,8 +15,7 @@
  */
 import * as express from "express";
 import {Request, Response} from "express";
-// import mongoose from "mongoose";
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 import UserController from "./controllers/UserController";
 import TuitController from "./controllers/TuitController";
 import LikeController from "./controllers/LikeController";
@@ -35,6 +34,11 @@ require('dotenv').config();
 const PROTOCOL = "mongodb+srv";
 const DB_USERNAME = process.env.DB_USERNAME;
 const DB_PASSWORD = process.env.DB_PASSWORD;
+
+app.get('/env', (req, res) =>
+    res.send(process.env));
+app.get('/username', (req, res) =>
+    res.send(process.env.username));
 
 const HOST = "cluster0.kndb1tp.mongodb.net";
 const DB_NAME = "fse";
@@ -55,7 +59,7 @@ app.get('/', (req: Request, res: Response) =>
     res.send('Welcome to Foundation of Software Engineering!'));
 
 app.get('/hello', (req: Request, res: Response) =>
-    res.send('Welcome to Foundation of Software Engineering!'));
+    res.send('Hello World!'));
 
 /**
  * Start a server listening at port 4000 locally
