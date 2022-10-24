@@ -5,8 +5,11 @@ data
 out
 coverage
 .elasticbeanstalk
-.env
+
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+.env
+data_dump
