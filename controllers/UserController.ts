@@ -7,6 +7,7 @@ import UserControllerI from "../interfaces/UserControllerI";
 
 /**
  * @class UserController Implements RESTful Web service API for users resource.
+ * @implements {UserControllerI}
  * Defines the following HTTP endpoints:
  * <ul>
  *     <li>POST /api/users to create a new user instance</li>

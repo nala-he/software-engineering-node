@@ -1,6 +1,7 @@
 import User from "../models/User";
 /**
  * @file Declares API for Users related data access object methods
+ * @interface
  */
 export default interface UserDaoI {
     findAllUsers(): Promise<User[]>;

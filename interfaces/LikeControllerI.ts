@@ -2,6 +2,7 @@ import {Request, Response} from "express";
 
 /**
  * @file Declares API for Likes related controller methods
+ * @interface
  */
 export default interface LikeControllerI {
     findTuitsUserLiked (req: Request, res: Response): void;

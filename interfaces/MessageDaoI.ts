@@ -1,6 +1,7 @@
 import Message from "../models/Message";
 /**
  * @file Declares API for Messages related data access object methods
+ * @interface
  */
 export default interface MessageDaoI {
     userSendsMessage(sentBy: string, sentTo: string, message: Message): Promise<Message>;

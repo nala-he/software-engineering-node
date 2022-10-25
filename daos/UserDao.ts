@@ -9,6 +9,7 @@ import UserDaoI from "../interfaces/UserDaoI";
 /**
  * @class UserDao Implements Data Access Object managing data storage
  * of Users
+ * @implements {UserDaoI}
  * @property {UserDao} userDao Private single instance of UserDao
  */
 export default class UserDao implements UserDaoI {

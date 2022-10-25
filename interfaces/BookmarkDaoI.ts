@@ -1,6 +1,7 @@
 import Bookmark from "../models/Bookmark";
 /**
  * @file Declares API for Bookmarks related data access object methods
+ * @interface
  */
 export default interface BookmarkDaoI {
     userBookmarksTuit(uid: string, tid: string): Promise<Bookmark>;

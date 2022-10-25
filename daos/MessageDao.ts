@@ -9,6 +9,7 @@ import MessageDaoI from "../interfaces/MessageDaoI";
 /**
  * @class MessageDao Implements Data Access Object managing data storage
  * of Messages
+ * @implements {MessageDaoI}
  * @property {MessageDao} messageDao Private single instance of MessageDao
  */
 export default class MessageDao implements MessageDaoI {

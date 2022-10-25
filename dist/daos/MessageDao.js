@@ -13,6 +13,7 @@ const MessageModel_1 = require("../mongoose/MessageModel");
 /**
  * @class MessageDao Implements Data Access Object managing data storage
  * of Messages
+ * @implements {MessageDaoI}
  * @property {MessageDao} messageDao Private single instance of MessageDao
  */
 class MessageDao {

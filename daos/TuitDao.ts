@@ -9,6 +9,7 @@ import TuitDaoI from "../interfaces/TuitDaoI";
 /**
  * @class TuitDao Implements Data Access Object managing data storage
  * of Tuits
+ * @implements {TuitDaoI}
  * @property {TuitDao} tuitDao Private single instance of TuitDao
  */
 export default class TuitDao implements TuitDaoI {

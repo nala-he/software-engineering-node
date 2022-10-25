@@ -9,6 +9,7 @@ import bookmarkModel from "../mongoose/BookmarkModel";
 /**
  * @class BookmarkDao Implements Data Access Object managing data storage
  * of Bookmarks
+ * @implements {BookmarkDaoI}
  * @property {BookmarkDao} bookmarkDao Private single instance of BookmarkDao
  */
 export default class BookmarkDao implements BookmarkDaoI {

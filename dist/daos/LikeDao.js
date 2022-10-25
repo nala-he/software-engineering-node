@@ -17,6 +17,7 @@ const LikeModel_1 = require("../mongoose/LikeModel");
 /**
  * @class LikeDao Implements Data Access Object managing data storage
  * of Likes
+ * @implements {LikeDaoI}
  * @property {LikeDao} likeDao Private single instance of LikeDao
  */
 class LikeDao {

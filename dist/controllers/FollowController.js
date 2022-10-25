@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const FollowDao_1 = require("../daos/FollowDao");
 /**
  * @class FollowController Implements RESTful Web service API for follows resource.
+ * @implements {FollowControllerI}
  * Defines the following HTTP endpoints:
  * <ul>
  *     <li>POST /api/users/:follower/follows/:followed to create a new follow instance

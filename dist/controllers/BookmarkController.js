@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const BookmarkDao_1 = require("../daos/BookmarkDao");
 /**
  * @class BookmarkController Implements RESTful Web service API for bookmarks resource.
+ * @implements {BookmarkControllerI}
  * Defines the following HTTP endpoints:
  * <ul>
  *     <li>POST /api/users/:uid/bookmarks/:tid to record that a user bookmarked a tuit

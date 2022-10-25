@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const LikeDao_1 = require("../daos/LikeDao");
 /**
  * @class LikeController Implements RESTful Web service API for likes resource.
+ * @implements {LikeControllerI}
  * Defines the following HTTP endpoints:
  * <ul>
  *     <li>GET /api/users/:uid/likes to retrieve all the tuits liked by a user

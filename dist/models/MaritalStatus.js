@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @file Enum for marital status
+ * @readonly
  * @enum {string}
  */
 var MaritalStatus;

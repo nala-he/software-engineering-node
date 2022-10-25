@@ -2,6 +2,7 @@ import {Request, Response} from "express";
 
 /**
  * @file Declares API for Messages related controller methods
+ * @interface
  */
 export default interface MessageControllerI {
     userSendsMessage(req: Request, res: Response): void;

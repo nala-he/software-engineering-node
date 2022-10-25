@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const UserDao_1 = require("../daos/UserDao");
 /**
  * @class UserController Implements RESTful Web service API for users resource.
+ * @implements {UserControllerI}
  * Defines the following HTTP endpoints:
  * <ul>
  *     <li>POST /api/users to create a new user instance</li>

@@ -13,6 +13,7 @@ const TuitModel_1 = require("../mongoose/TuitModel");
 /**
  * @class TuitDao Implements Data Access Object managing data storage
  * of Tuits
+ * @implements {TuitDaoI}
  * @property {TuitDao} tuitDao Private single instance of TuitDao
  */
 class TuitDao {

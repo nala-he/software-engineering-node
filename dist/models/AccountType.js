@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @file Enum for account type
+ * @readonly
  * @enum {string}
  */
 var AccountType;

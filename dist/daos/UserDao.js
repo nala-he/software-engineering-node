@@ -18,6 +18,7 @@ const UserModel_1 = require("../mongoose/UserModel");
 /**
  * @class UserDao Implements Data Access Object managing data storage
  * of Users
+ * @implements {UserDaoI}
  * @property {UserDao} userDao Private single instance of UserDao
  */
 class UserDao {

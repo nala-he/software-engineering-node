@@ -7,6 +7,7 @@ import MessageControllerI from "../interfaces/MessageControllerI";
 
 /**
  * @class MessageController Implements RESTful Web service API for messages resource.
+ * @implements {MessageControllerI}
  * Defines the following HTTP endpoints:
  * <ul>
  *     <li>GET /api/users/:sender/messages/:receiver to record a message from a user to another

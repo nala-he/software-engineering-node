@@ -2,12 +2,12 @@
  * @file Controller RESTful Web service API for tuits resource
  */
 import {Request, Response, Express} from "express";
-import TuitDaoI from "../interfaces/TuitDaoI";
 import TuitControllerI from "../interfaces/TuitControllerI";
 import TuitDao from "../daos/TuitDao";
 
 /**
  * @class TuitController Implements RESTful Web service API for tuits resource.
+ * @implements {TuitControllerI}
  * Defines the following HTTP endpoints:
  * <ul>
  *     <li>POST /api/users/:uid/tuits to create a new tuit instance for

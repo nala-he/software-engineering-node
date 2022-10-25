@@ -1,5 +1,6 @@
 /**
  * @file Enum for marital status
+ * @readonly
  * @enum {string}
  */
 enum MaritalStatus {

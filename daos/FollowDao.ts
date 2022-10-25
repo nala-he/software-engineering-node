@@ -9,6 +9,7 @@ import followModel from "../mongoose/FollowModel";
 /**
  * @class FollowDao Implements Data Access Object managing data storage
  * of Follows
+ * @implements {FollowDaoI}
  * @property {FollowDao} followDao Private single instance of FollowDao
  */
 export default class FollowDao implements FollowDaoI {

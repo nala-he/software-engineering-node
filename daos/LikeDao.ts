@@ -9,6 +9,7 @@ import Like from "../models/Like";
 /**
  * @class LikeDao Implements Data Access Object managing data storage
  * of Likes
+ * @implements {LikeDaoI}
  * @property {LikeDao} likeDao Private single instance of LikeDao
  */
 export default class LikeDao implements LikeDaoI {

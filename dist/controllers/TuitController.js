@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const TuitDao_1 = require("../daos/TuitDao");
 /**
  * @class TuitController Implements RESTful Web service API for tuits resource.
+ * @implements {TuitControllerI}
  * Defines the following HTTP endpoints:
  * <ul>
  *     <li>POST /api/users/:uid/tuits to create a new tuit instance for

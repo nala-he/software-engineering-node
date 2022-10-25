@@ -13,6 +13,7 @@ const FollowModel_1 = require("../mongoose/FollowModel");
 /**
  * @class FollowDao Implements Data Access Object managing data storage
  * of Follows
+ * @implements {FollowDaoI}
  * @property {FollowDao} followDao Private single instance of FollowDao
  */
 class FollowDao {

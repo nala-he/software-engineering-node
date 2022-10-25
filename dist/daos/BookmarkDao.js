@@ -13,6 +13,7 @@ const BookmarkModel_1 = require("../mongoose/BookmarkModel");
 /**
  * @class BookmarkDao Implements Data Access Object managing data storage
  * of Bookmarks
+ * @implements {BookmarkDaoI}
  * @property {BookmarkDao} bookmarkDao Private single instance of BookmarkDao
  */
 class BookmarkDao {
