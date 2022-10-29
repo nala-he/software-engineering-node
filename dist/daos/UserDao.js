@@ -22,7 +22,15 @@ const UserModel_1 = require("../mongoose/UserModel");
  * @property {UserDao} userDao Private single instance of UserDao
  */
 class UserDao {
-    constructor() { }
+    constructor() {
+        /**
+         * Removes multiple users from the database by the username. Useful for testing
+         * @param {string} username Usernames of users to be deleted
+         * @returns Promise To be notified when users are removed from the
+         * database
+         */
+        this.deleteUsersByUsername = (username) => __awaiter(this, void 0, void 0, function* () { return UserModel_1.default.deleteMany({ username }); });
+    }
     /**
      * Uses UserModel to retrieve all user documents from users collection
      * @returns Promise To be notified when the users are retrieved from
