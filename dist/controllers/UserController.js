@@ -92,7 +92,7 @@ UserController.getInstance = (app) => {
         app.delete('/api/users/:uid', UserController.userController.deleteUser);
         app.put('/api/users/:uid', UserController.userController.updateUser);
         // for testing. Not RESTful
-        app.delete("/api/users/username/:username/delete", UserController.userController.deleteUsersByUsername);
+        app.delete('/api/users/username/:username/delete', UserController.userController.deleteUsersByUsername);
     }
     return UserController.userController;
 };

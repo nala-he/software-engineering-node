@@ -85,13 +85,16 @@ TuitController.tuitDao = TuitDao_1.default.getInstance();
 TuitController.getInstance = (app) => {
     if (TuitController.tuitController === null) {
         TuitController.tuitController = new TuitController();
+        app.get('/api/tuits', TuitController.tuitController.findAllTuits);
+        app.get('/api/tuits/:tid', TuitController.tuitController.findTuitById);
+        app.get('/api/users/:uid/tuits', TuitController.tuitController.findTuitsByUser);
+        app.post('/api/users/:uid/tuits', TuitController.tuitController.createTuitByUser);
+        app.delete('/api/tuits/:tid', TuitController.tuitController.deleteTuit);
+        app.put('/api/tuits/:tid', TuitController.tuitController.updateTuit);
+        // // for testing. Not RESTful
+        // app.delete('/api/tuits/content/:content/delete',
+        //     TuitController.tuitController.deleteTuitsByContent);
     }
-    app.get('/api/tuits', TuitController.tuitController.findAllTuits);
-    app.get('/api/tuits/:tid', TuitController.tuitController.findTuitById);
-    app.get('/api/users/:uid/tuits', TuitController.tuitController.findTuitsByUser);
-    app.post('/api/users/:uid/tuits', TuitController.tuitController.createTuitByUser);
-    app.delete('/api/tuits/:tid', TuitController.tuitController.deleteTuit);
-    app.put('/api/tuits/:tid', TuitController.tuitController.updateTuit);
     return TuitController.tuitController;
 };
 //# sourceMappingURL=TuitController.js.map

@@ -39,7 +39,7 @@ export default class UserController implements UserControllerI {
             app.delete('/api/users/:uid', UserController.userController.deleteUser);
             app.put('/api/users/:uid', UserController.userController.updateUser);
             // for testing. Not RESTful
-            app.delete("/api/users/username/:username/delete",
+            app.delete('/api/users/username/:username/delete',
                 UserController.userController.deleteUsersByUsername);
         }
         return UserController.userController;
@@ -56,7 +56,6 @@ export default class UserController implements UserControllerI {
     findAllUsers = (req: Request, res: Response) =>
         UserController.userDao.findAllUsers()
             .then(users => res.json(users));
-
     /**
      * Retrieves the user by their primary key
      * @param {Request} req Represents request from client, including path

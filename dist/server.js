@@ -32,6 +32,8 @@ require('dotenv').config();
 const PROTOCOL = "mongodb+srv";
 const DB_USERNAME = process.env.DB_USERNAME;
 const DB_PASSWORD = process.env.DB_PASSWORD;
+// const DB_USERNAME = "fse-nala";
+// const DB_PASSWORD = "H6GVmTUTH5KEZNS0";
 const HOST = "cluster0.kndb1tp.mongodb.net";
 const DB_NAME = "fse";
 const DB_QUERY = "retryWrites=true&w=majority";

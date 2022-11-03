@@ -35,13 +35,16 @@ export default class TuitController implements TuitControllerI {
     public static getInstance = (app: Express): TuitController => {
         if (TuitController.tuitController === null) {
             TuitController.tuitController = new TuitController();
+            app.get('/api/tuits', TuitController.tuitController.findAllTuits);
+            app.get('/api/tuits/:tid', TuitController.tuitController.findTuitById);
+            app.get('/api/users/:uid/tuits', TuitController.tuitController.findTuitsByUser);
+            app.post('/api/users/:uid/tuits', TuitController.tuitController.createTuitByUser);
+            app.delete('/api/tuits/:tid', TuitController.tuitController.deleteTuit);
+            app.put('/api/tuits/:tid', TuitController.tuitController.updateTuit);
+            // // for testing. Not RESTful
+            // app.delete('/api/tuits/content/:content/delete',
+            //     TuitController.tuitController.deleteTuitsByContent);
         }
-        app.get('/api/tuits', TuitController.tuitController.findAllTuits);
-        app.get('/api/tuits/:tid', TuitController.tuitController.findTuitById);
-        app.get('/api/users/:uid/tuits', TuitController.tuitController.findTuitsByUser);
-        app.post('/api/users/:uid/tuits', TuitController.tuitController.createTuitByUser);
-        app.delete('/api/tuits/:tid', TuitController.tuitController.deleteTuit);
-        app.put('/api/tuits/:tid', TuitController.tuitController.updateTuit);
 
         return TuitController.tuitController;
     }
@@ -110,4 +113,15 @@ export default class TuitController implements TuitControllerI {
     updateTuit = (req: Request, res: Response) =>
         TuitController.tuitDao.updateTuit(req.params.tid, req.body)
             .then(status => res.json(status));
+
+    // /**
+    //  * Removes tuit instances from the database. Useful for testing
+    //  * @param {Request} req Represents request from client
+    //  * @param {Response} res Represents response to client, including status
+    //  * on whether deleting all tuits was successful or not
+    //  */
+    // deleteTuitsByContent = (req: Request, res: Response) =>
+    //     TuitController.tuitDao.deleteTuitsByContent(req.params.content)
+    //         .then(status => res.send(status));
+
 }
