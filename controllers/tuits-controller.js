@@ -15,7 +15,7 @@ import TuitDao from "../daos/TuitDao";
  * @property {TuitController} tuitController Singleton controller implementing
  * RESTful Web service API
  */
-export default class TuitController {
+export default class TuitsController {
     constructor() {
         /**
          * Retrieves all tuits from the database and returns an array of tuits.

@@ -17,24 +17,49 @@ import * as express from "express";
 import {Request, Response} from "express";
 import mongoose from "mongoose";
 import UserController from "./controllers/UserController";
-import TuitController from "./controllers/TuitController";
+import TuitController from "./controllers/tuits-controller";
 import LikeController from "./controllers/LikeController";
 import FollowController from "./controllers/FollowController";
 import BookmarkController from "./controllers/BookmarkController";
 import MessageController from "./controllers/MessageController";
+import AuthenticationController from "./controllers/auth-controller";
+
+const session = require("express-session");
 
 const cors = require('cors')
 const app = express();
-app.use(cors());
+const corsConfig = {
+    origin: 'http://localhost:3000',
+    credentials: true,
+    optionSuccessStatus: 200
+};
+app.use(cors(corsConfig));
 app.use(express.json());
 
 require('dotenv').config();
 
+let sess = {
+    secret: process.env.REACT_APP_API_BASE,
+    cookie: {
+        secure: false
+    },
+    resave: true,
+    saveUninitialized: true
+}
+
+if (process.env.ENV === 'PRODUCTION') {
+    app.set('trust proxy', 1)
+    sess.cookie.secure = true
+}
+
+app.use(session(sess));
+
 // build the connection string
 const PROTOCOL = "mongodb+srv";
-const DB_USERNAME = process.env.DB_USERNAME;
-const DB_PASSWORD = process.env.DB_PASSWORD;
-
+// const DB_USERNAME = process.env.DB_USERNAME;
+// const DB_PASSWORD = process.env.DB_PASSWORD;
+const DB_USERNAME = "fse-nala";
+const DB_PASSWORD = "H6GVmTUTH5KEZNS0";
 const HOST = "cluster0.kndb1tp.mongodb.net";
 const DB_NAME = "fse";
 const DB_QUERY = "retryWrites=true&w=majority";
@@ -50,6 +75,7 @@ const likeController = LikeController.getInstance(app);
 const followController = FollowController.getInstance(app);
 const bookmarkController = BookmarkController.getInstance(app);
 const messageController = MessageController.getInstance(app);
+const authenticationController = AuthenticationController.getInstance(app);
 
 app.get('/', (req: Request, res: Response) =>
     res.send('Welcome to Foundation of Software Engineering!'));

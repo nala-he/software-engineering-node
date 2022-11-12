@@ -18,20 +18,42 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const mongoose_1 = require("mongoose");
 const UserController_1 = require("./controllers/UserController");
-const TuitController_1 = require("./controllers/TuitController");
+const tuits_controller_1 = require("./controllers/tuits-controller");
 const LikeController_1 = require("./controllers/LikeController");
 const FollowController_1 = require("./controllers/FollowController");
 const BookmarkController_1 = require("./controllers/BookmarkController");
 const MessageController_1 = require("./controllers/MessageController");
+const auth_controller_1 = require("./controllers/auth-controller");
+const session = require("express-session");
 const cors = require('cors');
 const app = express();
-app.use(cors());
+const corsConfig = {
+    origin: 'http://localhost:3000',
+    credentials: true,
+    optionSuccessStatus: 200
+};
+app.use(cors(corsConfig));
 app.use(express.json());
 require('dotenv').config();
+let sess = {
+    secret: process.env.REACT_APP_API_BASE,
+    cookie: {
+        secure: false
+    },
+    resave: true,
+    saveUninitialized: true
+};
+if (process.env.ENV === 'PRODUCTION') {
+    app.set('trust proxy', 1);
+    sess.cookie.secure = true;
+}
+app.use(session(sess));
 // build the connection string
 const PROTOCOL = "mongodb+srv";
-const DB_USERNAME = process.env.DB_USERNAME;
-const DB_PASSWORD = process.env.DB_PASSWORD;
+// const DB_USERNAME = process.env.DB_USERNAME;
+// const DB_PASSWORD = process.env.DB_PASSWORD;
+const DB_USERNAME = "fse-nala";
+const DB_PASSWORD = "H6GVmTUTH5KEZNS0";
 const HOST = "cluster0.kndb1tp.mongodb.net";
 const DB_NAME = "fse";
 const DB_QUERY = "retryWrites=true&w=majority";
@@ -40,11 +62,12 @@ const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${
 mongoose_1.default.connect(connectionString);
 //create RESTful Web service API
 const userController = UserController_1.default.getInstance(app);
-const tuitController = TuitController_1.default.getInstance(app);
+const tuitController = tuits_controller_1.default.getInstance(app);
 const likeController = LikeController_1.default.getInstance(app);
 const followController = FollowController_1.default.getInstance(app);
 const bookmarkController = BookmarkController_1.default.getInstance(app);
 const messageController = MessageController_1.default.getInstance(app);
+const authenticationController = auth_controller_1.default.getInstance(app);
 app.get('/', (req, res) => res.send('Welcome to Foundation of Software Engineering!'));
 app.get('/hello', (req, res) => res.send('Hello World!'));
 /**

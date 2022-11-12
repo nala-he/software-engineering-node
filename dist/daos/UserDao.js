@@ -30,6 +30,13 @@ class UserDao {
          * database
          */
         this.deleteUsersByUsername = (username) => __awaiter(this, void 0, void 0, function* () { return UserModel_1.default.deleteMany({ username }); });
+        /**
+         * Uses UserModel to retrieve a user documentation from users collection by
+         * its username
+         * @returns Promise To be notified when the user is retrieved from
+         * database
+         */
+        this.findUserByUsername = (username) => __awaiter(this, void 0, void 0, function* () { return UserModel_1.default.findOne({ username }); });
     }
     /**
      * Uses UserModel to retrieve all user documents from users collection

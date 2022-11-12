@@ -115,4 +115,13 @@ export default class UserDao implements UserDaoI {
      */
     deleteUsersByUsername = async (username: string): Promise<any> =>
         UserModel.deleteMany({username});
+
+    /**
+     * Uses UserModel to retrieve a user documentation from users collection by
+     * its username
+     * @returns Promise To be notified when the user is retrieved from
+     * database
+     */
+    findUserByUsername = async (username: string): Promise<any> =>
+        UserModel.findOne({username});
 }

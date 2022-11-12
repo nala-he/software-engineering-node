@@ -46,4 +46,8 @@ export default class User {
         this.lastName = lastName;
         this.email = email;
     }
+
+    public setPassword(password: string) {
+        this.password = password;
+    }
 }

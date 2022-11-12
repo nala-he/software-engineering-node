@@ -41,9 +41,6 @@ export default class TuitController implements TuitControllerI {
             app.post('/api/users/:uid/tuits', TuitController.tuitController.createTuitByUser);
             app.delete('/api/tuits/:tid', TuitController.tuitController.deleteTuit);
             app.put('/api/tuits/:tid', TuitController.tuitController.updateTuit);
-            // // for testing. Not RESTful
-            // app.delete('/api/tuits/content/:content/delete',
-            //     TuitController.tuitController.deleteTuitsByContent);
         }
 
         return TuitController.tuitController;
@@ -90,9 +87,13 @@ export default class TuitController implements TuitControllerI {
      * body formatted as JSON containing the new tuit that was inserted in the
      * database
      */
-    createTuitByUser = (req: Request, res: Response) =>
-        TuitController.tuitDao.createTuitByUser(req.params.uid, req.body)
+    createTuitByUser = (req, res) => {
+        let userId = (req.params.uid === "me" && req.session['profile'])
+            ? req.session['profile']._id : req.params.uid;
+        TuitController.tuitDao.createTuitByUser(userId, req.body)
             .then(tuit => res.json(tuit));
+    }
+
 
     /**
      * @param {Request} req Represents request from client, including path
@@ -113,15 +114,5 @@ export default class TuitController implements TuitControllerI {
     updateTuit = (req: Request, res: Response) =>
         TuitController.tuitDao.updateTuit(req.params.tid, req.body)
             .then(status => res.json(status));
-
-    // /**
-    //  * Removes tuit instances from the database. Useful for testing
-    //  * @param {Request} req Represents request from client
-    //  * @param {Response} res Represents response to client, including status
-    //  * on whether deleting all tuits was successful or not
-    //  */
-    // deleteTuitsByContent = (req: Request, res: Response) =>
-    //     TuitController.tuitDao.deleteTuitsByContent(req.params.content)
-    //         .then(status => res.send(status));
 
 }
