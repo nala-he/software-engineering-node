@@ -41,7 +41,7 @@ export default class AuthenticationController {
                 .createUser(newUser);
             insertedUser.setPassword('');
             req.session['profile'] = insertedUser;
-            res.json(insertedUser);
+            return res.json(insertedUser);
         }
     }
 
@@ -78,7 +78,7 @@ export default class AuthenticationController {
         if (match) {
             existingUser.password = '*****';
             req.session['profile'] = existingUser;
-            res.json(existingUser);
+            return res.json(existingUser);
         } else {
             res.sendStatus(403);
         }

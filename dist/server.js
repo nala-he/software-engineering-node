@@ -40,7 +40,7 @@ let sess = {
     cookie: {
         secure: false
     },
-    resave: true,
+    resave: false,
     saveUninitialized: true
 };
 if (process.env.ENV === 'PRODUCTION') {

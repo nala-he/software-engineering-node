@@ -35,8 +35,12 @@ class TuitController {
          * @param {Response} res Represents response to client, including the
          * body formatted as JSON arrays containing the tuit objects
          */
-        this.findTuitsByUser = (req, res) => TuitController.tuitDao.findTuitsByUser(req.params.uid)
-            .then(tuits => res.json(tuits));
+        this.findTuitsByUser = (req, res) => {
+            let userId = req.params.uid === "me" && req.session['profile'] ?
+                req.session['profile']._id : req.params.uid;
+            TuitController.tuitDao.findTuitsByUser(userId)
+                .then(tuits => res.json(tuits));
+        };
         /**
          * @param {Request} req Represents request from client, including path
          * parameter tid identifying the primary key of the tuit to be retrieved
