@@ -35,6 +35,13 @@ class LikeDao {
                 .exec();
         });
         /**
+         * Checks if there's a likes document in the database for user/tuit combination
+         * @param uid -  User's primary key
+         * @param tid - Tuit's primary key
+         * @Returns Promise To be notified when user is retrieved from the database
+         */
+        this.findUserLikesTuit = (uid, tid) => __awaiter(this, void 0, void 0, function* () { return LikeModel_1.default.findOne({ tuit: tid, likedBy: uid }); });
+        /**
          * Uses LikeModel to retrieve users documents who liked tuits from likes collection
          * @param {string} tid Tuit's primary key
          * @returns Promise To be notified when users are retrieved from the database
@@ -51,11 +58,7 @@ class LikeDao {
          * @param {string} tid Tuit's primary key
          * @returns Promise To be notified when count is retrieved from the database
          */
-        this.findTuitLikesCount = (tid) => __awaiter(this, void 0, void 0, function* () {
-            return LikeModel_1.default
-                .find({ likedTuit: tid })
-                .count();
-        });
+        this.countHowManyLikedTuit = (tid) => __awaiter(this, void 0, void 0, function* () { return LikeModel_1.default.count({ likedTuit: tid }); });
         /**
          * Inserts like instance indicating relationship between a user and a tuit
          * into the database

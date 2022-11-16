@@ -1,6 +1,9 @@
-import TuitDao from "../daos/TuitDao";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const TuitDao_1 = require("../daos/TuitDao");
 /**
  * @class TuitController Implements RESTful Web service API for tuits resource.
+ * @implements {TuitControllerI}
  * Defines the following HTTP endpoints:
  * <ul>
  *     <li>POST /api/users/:uid/tuits to create a new tuit instance for
@@ -15,7 +18,7 @@ import TuitDao from "../daos/TuitDao";
  * @property {TuitController} tuitController Singleton controller implementing
  * RESTful Web service API
  */
-export default class TuitsController {
+class TuitController {
     constructor() {
         /**
          * Retrieves all tuits from the database and returns an array of tuits.
@@ -32,8 +35,12 @@ export default class TuitsController {
          * @param {Response} res Represents response to client, including the
          * body formatted as JSON arrays containing the tuit objects
          */
-        this.findTuitsByUser = (req, res) => TuitController.tuitDao.findTuitsByUser(req.params.uid)
-            .then(tuits => res.json(tuits));
+        this.findTuitsByUser = (req, res) => {
+            let userId = req.params.uid === "me" && req.session['profile'] ?
+                req.session['profile']._id : req.params.uid;
+            TuitController.tuitDao.findTuitsByUser(userId)
+                .then(tuits => res.json(tuits));
+        };
         /**
          * @param {Request} req Represents request from client, including path
          * parameter tid identifying the primary key of the tuit to be retrieved
@@ -50,8 +57,12 @@ export default class TuitsController {
          * body formatted as JSON containing the new tuit that was inserted in the
          * database
          */
-        this.createTuitByUser = (req, res) => TuitController.tuitDao.createTuitByUser(req.params.uid, req.body)
-            .then(tuit => res.json(tuit));
+        this.createTuitByUser = (req, res) => {
+            let userId = (req.params.uid === "me" && req.session['profile'])
+                ? req.session['profile']._id : req.params.uid;
+            TuitController.tuitDao.createTuitByUser(userId, req.body)
+                .then(tuit => res.json(tuit));
+        };
         /**
          * @param {Request} req Represents request from client, including path
          * parameter tid identifying the primary key of the tuit to be removed
@@ -70,8 +81,9 @@ export default class TuitsController {
             .then(status => res.json(status));
     }
 }
+exports.default = TuitController;
 TuitController.tuitController = null;
-TuitController.tuitDao = TuitDao.getInstance();
+TuitController.tuitDao = TuitDao_1.default.getInstance();
 /**
  * Creates singleton controller instance
  * @param {Express} app Express instance to declare the RESTful Web service
@@ -81,12 +93,13 @@ TuitController.tuitDao = TuitDao.getInstance();
 TuitController.getInstance = (app) => {
     if (TuitController.tuitController === null) {
         TuitController.tuitController = new TuitController();
+        app.get('/api/tuits', TuitController.tuitController.findAllTuits);
+        app.get('/api/tuits/:tid', TuitController.tuitController.findTuitById);
+        app.get('/api/users/:uid/tuits', TuitController.tuitController.findTuitsByUser);
+        app.post('/api/users/:uid/tuits', TuitController.tuitController.createTuitByUser);
+        app.delete('/api/tuits/:tid', TuitController.tuitController.deleteTuit);
+        app.put('/api/tuits/:tid', TuitController.tuitController.updateTuit);
     }
-    app.get('/api/tuits', TuitController.tuitController.findAllTuits);
-    app.get('/api/tuits/:tid', TuitController.tuitController.findTuitById);
-    app.get('/api/users/:uid/tuits', TuitController.tuitController.findTuitsByUser);
-    app.post('/api/users/:uid/tuits', TuitController.tuitController.createTuitByUser);
-    app.delete('/api/tuits/:tid', TuitController.tuitController.deleteTuit);
-    app.put('/api/tuits/:tid', TuitController.tuitController.updateTuit);
     return TuitController.tuitController;
 };
+//# sourceMappingURL=TuitsController.js.map

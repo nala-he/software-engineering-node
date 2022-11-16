@@ -54,6 +54,15 @@ class TuitDao {
          * @returns Promise To be notified when tuit is inserted into the database
          */
         this.createTuitByUser = (uid, tuit) => __awaiter(this, void 0, void 0, function* () { return TuitModel_1.default.create(Object.assign(Object.assign({}, tuit), { postedBy: uid })); });
+        /**
+         * Update stats info for tuits
+         * @param tid Primary key of tuit to be updated
+         * @param newStats newStats object
+         * @returns Promise To be notified when tuit is updated
+         */
+        this.updateLikes = (tid, newStats) => __awaiter(this, void 0, void 0, function* () {
+            return TuitModel_1.default.updateOne({ _id: tid }, { $set: { stats: newStats } });
+        });
     }
     /**
      * Updates tuit with new values in database

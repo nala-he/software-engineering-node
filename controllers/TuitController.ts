@@ -48,6 +48,8 @@ export default class TuitController implements TuitControllerI {
 
     private constructor() {}
 
+    getTuitDao = () => TuitController.tuitDao;
+
     /**
      * Retrieves all tuits from the database and returns an array of tuits.
      * @param {Request} req Represents request from client
@@ -96,7 +98,6 @@ export default class TuitController implements TuitControllerI {
         TuitController.tuitDao.createTuitByUser(userId, req.body)
             .then(tuit => res.json(tuit));
     }
-
 
     /**
      * @param {Request} req Represents request from client, including path

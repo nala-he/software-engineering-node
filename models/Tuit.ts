@@ -16,11 +16,24 @@ export default class Tuit {
     private tuit: string;
     private postedOn: Date;
     private postedBy: User | null;
+    private stats: {
+        replies: Number | 0;
+        retuits: Number | 0;
+        likes: Number | 0;
+    }
 
     constructor(id: string, tuit: string, postedOn: Date, postedBy: any) {
         this.id = id;
         this.tuit = tuit;
         this.postedOn = postedOn;
         this.postedBy = postedBy;
+    }
+
+    public setLikes(likes: Number) {
+        this.stats.likes = likes;
+    }
+
+    public getStats() {
+        return this.stats;
     }
 }

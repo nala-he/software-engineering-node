@@ -14,6 +14,12 @@ class Tuit {
         this.postedOn = postedOn;
         this.postedBy = postedBy;
     }
+    setLikes(likes) {
+        this.stats.likes = likes;
+    }
+    getStats() {
+        return this.stats;
+    }
 }
 exports.default = Tuit;
 //# sourceMappingURL=Tuit.js.map

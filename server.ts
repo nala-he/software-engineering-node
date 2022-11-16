@@ -17,12 +17,12 @@ import * as express from "express";
 import {Request, Response} from "express";
 import mongoose from "mongoose";
 import UserController from "./controllers/UserController";
-import TuitController from "./controllers/tuits-controller";
+import TuitController from "./controllers/TuitController";
 import LikeController from "./controllers/LikeController";
 import FollowController from "./controllers/FollowController";
 import BookmarkController from "./controllers/BookmarkController";
 import MessageController from "./controllers/MessageController";
-import AuthenticationController from "./controllers/auth-controller";
+import AuthenticationController from "./controllers/AuthController";
 
 const session = require("express-session");
 
@@ -71,7 +71,7 @@ mongoose.connect(connectionString)
 //create RESTful Web service API
 const userController = UserController.getInstance(app);
 const tuitController = TuitController.getInstance(app);
-const likeController = LikeController.getInstance(app);
+const likeController = LikeController.getInstance(app, tuitController);
 const followController = FollowController.getInstance(app);
 const bookmarkController = BookmarkController.getInstance(app);
 const messageController = MessageController.getInstance(app);

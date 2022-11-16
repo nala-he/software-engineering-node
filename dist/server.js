@@ -18,12 +18,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const mongoose_1 = require("mongoose");
 const UserController_1 = require("./controllers/UserController");
-const tuits_controller_1 = require("./controllers/tuits-controller");
+const TuitController_1 = require("./controllers/TuitController");
 const LikeController_1 = require("./controllers/LikeController");
 const FollowController_1 = require("./controllers/FollowController");
 const BookmarkController_1 = require("./controllers/BookmarkController");
 const MessageController_1 = require("./controllers/MessageController");
-const auth_controller_1 = require("./controllers/auth-controller");
+const AuthController_1 = require("./controllers/AuthController");
 const session = require("express-session");
 const cors = require('cors');
 const app = express();
@@ -62,12 +62,12 @@ const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${
 mongoose_1.default.connect(connectionString);
 //create RESTful Web service API
 const userController = UserController_1.default.getInstance(app);
-const tuitController = tuits_controller_1.default.getInstance(app);
-const likeController = LikeController_1.default.getInstance(app);
+const tuitController = TuitController_1.default.getInstance(app);
+const likeController = LikeController_1.default.getInstance(app, tuitController);
 const followController = FollowController_1.default.getInstance(app);
 const bookmarkController = BookmarkController_1.default.getInstance(app);
 const messageController = MessageController_1.default.getInstance(app);
-const authenticationController = auth_controller_1.default.getInstance(app);
+const authenticationController = AuthController_1.default.getInstance(app);
 app.get('/', (req, res) => res.send('Welcome to Foundation of Software Engineering!'));
 app.get('/hello', (req, res) => res.send('Hello World!'));
 /**
