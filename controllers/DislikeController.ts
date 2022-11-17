@@ -65,10 +65,6 @@ export default class DislikeController implements DislikeControllerI {
     private constructor() {
     }
 
-    findUserDislikesTuit(req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>>): void {
-        throw new Error("Method not implemented.");
-    }
-
     /**
      * Retrieves all tuits liked by a user from the database
      * @param {Request} req Represents request from client, including the path
@@ -135,6 +131,9 @@ export default class DislikeController implements DislikeControllerI {
             const howManyLikedTuit = await DislikeController.likeDao
                 .countHowManyLikedTuit(tid);
             let tuit = await DislikeController.tuitDao.findTuitById(tid);
+
+            console.log(tuit);
+
             if (userAlreadyDislikedTuit) {
                 // decrease dislikes, undislike
                 await DislikeController.dislikeDao.userUndislikesTuit(userId, tid);

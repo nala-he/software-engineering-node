@@ -96,6 +96,7 @@ class DislikeController {
                 const howManyLikedTuit = yield DislikeController.likeDao
                     .countHowManyLikedTuit(tid);
                 let tuit = yield DislikeController.tuitDao.findTuitById(tid);
+                console.log(tuit);
                 if (userAlreadyDislikedTuit) {
                     // decrease dislikes, undislike
                     yield DislikeController.dislikeDao.userUndislikesTuit(userId, tid);
@@ -115,9 +116,6 @@ class DislikeController {
                 res.sendStatus(404);
             }
         });
-    }
-    findUserDislikesTuit(req, res) {
-        throw new Error("Method not implemented.");
     }
 }
 exports.default = DislikeController;
