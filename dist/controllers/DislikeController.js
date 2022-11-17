@@ -96,7 +96,6 @@ class DislikeController {
                 const howManyLikedTuit = yield DislikeController.likeDao
                     .countHowManyLikedTuit(tid);
                 let tuit = yield DislikeController.tuitDao.findTuitById(tid);
-                console.log(userAlreadyDislikedTuit);
                 if (userAlreadyDislikedTuit) {
                     // decrease dislikes, undislike
                     yield DislikeController.dislikeDao.userUndislikesTuit(userId, tid);
