@@ -50,6 +50,15 @@ export default class LikeDao implements LikeDaoI {
             LikeModel.findOne({likedTuit: tid, likedBy: uid});
 
     /**
+     * Checks if there's a dislikes document in the database for user/tuit combination
+     * @param uid -  User's primary key
+     * @param tid - Tuit's primary key
+     * @Returns Promise To be notified when user is retrieved from the database
+     */
+    findUserDislikesTuit = async (uid, tid) =>
+        LikeModel.findOne({dislikedTuit: tid, dislikedBy: uid});
+
+    /**
      * Uses LikeModel to retrieve users documents who liked tuits from likes collection
      * @param {string} tid Tuit's primary key
      * @returns Promise To be notified when users are retrieved from the database
@@ -68,6 +77,14 @@ export default class LikeDao implements LikeDaoI {
      */
     countHowManyLikedTuit = async (tid: string): Promise<any> =>
         LikeModel.count({likedTuit: tid});
+
+    /**
+     * Uses LikeModel to retrieve count of dislikedTuit documents from likes collection
+     * @param {string} tid Tuit's primary key
+     * @returns Promise To be notified when count is retrieved from the database
+     */
+    countHowManyDislikedTuit = async (tid: string): Promise<any> =>
+        LikeModel.count({dislikedTuit: tid});
     /**
      * Inserts like instance indicating relationship between a user and a tuit
      * into the database

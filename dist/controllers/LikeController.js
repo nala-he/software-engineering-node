@@ -118,6 +118,43 @@ class LikeController {
                 res.sendStatus(404);
             }
         });
+        /**
+         * @param req Represents request from client, including the
+         * path parameters uid and tid representing the user that is disliking
+         * the tuit and the tuit being disliked
+         * @param res Represents response to client, including status
+         * on whether dislike status was successful updated or not
+         */
+        this.userTogglesTuitDislikes = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const uid = req.params.uid;
+            const tid = req.params.tid;
+            const profile = req.session['profile'];
+            const userId = uid === "me" && profile ?
+                profile._id : uid;
+            try {
+                const userAlreadyLikedTuit = yield LikeController.likeDao
+                    .findUserLikesTuit(userId, tid);
+                const howManyLikedTuit = yield LikeController.likeDao
+                    .countHowManyLikedTuit(tid);
+                const howManyDislikedTuit = yield LikeController.likeDao
+                    .countHowManyDislikedTuit(tid);
+                let tuit = yield LikeController.tuitDao.findTuitById(tid);
+                if (userAlreadyLikedTuit) {
+                    yield LikeController.likeDao.userUnlikesTuit(userId, tid);
+                    tuit.stats.likes = howManyLikedTuit - 1;
+                    tuit.stats.dislikes = howManyDislikedTuit + 1;
+                }
+                else {
+                    tuit.stats.dislikes = howManyDislikedTuit + 1;
+                }
+                ;
+                yield LikeController.tuitDao.updateLikes(tid, tuit.stats);
+                res.sendStatus(200);
+            }
+            catch (e) {
+                res.sendStatus(404);
+            }
+        });
     }
 }
 exports.default = LikeController;

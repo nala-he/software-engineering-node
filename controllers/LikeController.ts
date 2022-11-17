@@ -150,5 +150,39 @@ export default class LikeController implements LikeControllerI {
         }
     }
 
+    /**
+     * @param req Represents request from client, including the
+     * path parameters uid and tid representing the user that is disliking
+     * the tuit and the tuit being disliked
+     * @param res Represents response to client, including status
+     * on whether dislike status was successful updated or not
+     */
+    userTogglesTuitDislikes = async (req, res) => {
+        const uid = req.params.uid;
+        const tid = req.params.tid;
+        const profile = req.session['profile'];
+        const userId = uid === "me" && profile ?
+            profile._id : uid;
+        try {
+            const userAlreadyLikedTuit = await LikeController.likeDao
+                .findUserLikesTuit(userId, tid);
+            const howManyLikedTuit = await LikeController.likeDao
+                .countHowManyLikedTuit(tid);
+            const howManyDislikedTuit = await LikeController.likeDao
+                .countHowManyDislikedTuit(tid);
+            let tuit = await LikeController.tuitDao.findTuitById(tid);
+            if (userAlreadyLikedTuit) {
+                await LikeController.likeDao.userUnlikesTuit(userId, tid);
+                tuit.stats.likes = howManyLikedTuit - 1;
+                tuit.stats.dislikes = howManyDislikedTuit + 1;
+            } else {
+                tuit.stats.dislikes = howManyDislikedTuit + 1;
+            };
+            await LikeController.tuitDao.updateLikes(tid, tuit.stats);
+            res.sendStatus(200);
+        } catch (e) {
+            res.sendStatus(404);
+        }
+    }
 }
 
