@@ -5,7 +5,6 @@ import {Express, Request, Response} from "express";
 import LikeDao from "../daos/LikeDao";
 import LikeControllerI from "../interfaces/LikeControllerI";
 import TuitDao from "../daos/TuitDao";
-import TuitController from "./TuitController";
 
 /**
  * @class LikeController Implements RESTful Web service API for likes resource.
