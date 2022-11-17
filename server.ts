@@ -71,7 +71,7 @@ mongoose.connect(connectionString)
 //create RESTful Web service API
 const userController = UserController.getInstance(app);
 const tuitController = TuitController.getInstance(app);
-const likeController = LikeController.getInstance(app, tuitController);
+const likeController = LikeController.getInstance(app);
 const followController = FollowController.getInstance(app);
 const bookmarkController = BookmarkController.getInstance(app);
 const messageController = MessageController.getInstance(app);

@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const LikeDao_1 = require("../daos/LikeDao");
+const TuitDao_1 = require("../daos/TuitDao");
 /**
  * @class LikeController Implements RESTful Web service API for likes resource.
  * @implements {LikeControllerI}
@@ -24,7 +25,11 @@ const LikeDao_1 = require("../daos/LikeDao");
  *     <li>POST /api/users/:uid/likes/:tid to record that a user likes a tuit
  *     </li>
  *     <li>DELETE /api/users/:uid/unlikes/:tid to record that a user
- *     no longer likes a tuit</li>
+ *     no longer likes a tuit
+ *     </li>
+ *     <li>PUT /api/users/:uid/unlikes/:tid to record the like status as
+ *     a user toggles the like button
+ *     </li>
  * </ul>
  * @property {LikeDao} likeDao Singleton DAO implementing likes CRUD operations
  * @property {LikeController} LikeController Singleton controller implementing
@@ -78,6 +83,13 @@ class LikeController {
          */
         this.userUnlikesTuit = (req, res) => LikeController.likeDao.userUnlikesTuit(req.params.uid, req.params.tid)
             .then(status => res.json(status));
+        /**
+         * @param req Represents request from client, including the
+         * path parameters uid and tid representing the user that is liking
+         * the tuit and the tuit being liked
+         * @param res Represents response to client, including status
+         * on whether like status was successful updated or not
+         */
         this.userTogglesTuitLikes = (req, res) => __awaiter(this, void 0, void 0, function* () {
             const uid = req.params.uid;
             const tid = req.params.tid;
@@ -90,17 +102,16 @@ class LikeController {
                 const howManyLikedTuit = yield LikeController.likeDao
                     .countHowManyLikedTuit(tid);
                 let tuit = yield LikeController.tuitDao.findTuitById(tid);
-                console.log(tuit);
                 if (userAlreadyLikedTuit) {
                     yield LikeController.likeDao.userUnlikesTuit(userId, tid);
-                    tuit.setLikes(howManyLikedTuit - 1);
+                    tuit.stats.likes = howManyLikedTuit - 1;
                 }
                 else {
                     yield LikeController.likeDao.userLikesTuit(userId, tid);
-                    tuit.setLikes(howManyLikedTuit + 1);
+                    tuit.stats.likes = howManyLikedTuit + 1;
                 }
                 ;
-                yield LikeController.tuitDao.updateLikes(tid, tuit.getStats());
+                yield LikeController.tuitDao.updateLikes(tid, tuit.stats);
                 res.sendStatus(200);
             }
             catch (e) {
@@ -112,6 +123,7 @@ class LikeController {
 exports.default = LikeController;
 LikeController.likeDao = LikeDao_1.default.getInstance();
 LikeController.likeController = null;
+LikeController.tuitDao = TuitDao_1.default.getInstance();
 /**
  * Creates singleton controller instance
  * @param {Express} app Express instance to declare the RESTful Web service
@@ -119,8 +131,7 @@ LikeController.likeController = null;
  * @param tuitController
  * @return LikeController
  */
-LikeController.getInstance = (app, tuitController) => {
-    LikeController.tuitDao = tuitController.getTuitDao();
+LikeController.getInstance = (app) => {
     if (LikeController.likeController === null) {
         LikeController.likeController = new LikeController();
         app.get("/api/users/:uid/likes", LikeController.likeController.findTuitsUserLiked);
