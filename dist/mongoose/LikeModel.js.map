@@ -1,1 +1,1 @@
-{"version":3,"file":"LikeModel.js","sourceRoot":"","sources":["../../mongoose/LikeModel.ts"],"names":[],"mappings":";;AAAA;;;GAGG;AACH,MAAM,QAAQ,GAAG,OAAO,CAAC,UAAU,CAAC,CAAC;AACrC,6CAAsC;AAEtC,MAAM,SAAS,GAAG,QAAQ,CAAC,KAAK,CAAC,YAAY,EAAE,oBAAU,CAAC,CAAC;AAC3D,kBAAe,SAAS,CAAC"}
+{"version":3,"file":"LikeModel.js","sourceRoot":"","sources":["../../mongoose/LikeModel.ts"],"names":[],"mappings":";;AAAA;;;GAGG;AACH,MAAM,QAAQ,GAAG,OAAO,CAAC,UAAU,CAAC,CAAC;AACrC,6CAAsC;AAEtC,MAAM,SAAS,GAAG,QAAQ,CAAC,KAAK,CAAC,WAAW,EAAE,oBAAU,CAAC,CAAC;AAC1D,kBAAe,SAAS,CAAC"}
