@@ -7,6 +7,7 @@ import DislikeControllerI from "../interfaces/DislikeControllerI";
 import TuitDao from "../daos/TuitDao";
 import { ParamsDictionary } from "express-serve-static-core";
 import { ParsedQs } from "qs";
+import LikeDao from "../daos/LikeDao";
 
 /**
  * @class DislikeController Implements RESTful Web service API for dislikes resource.
@@ -36,6 +37,7 @@ export default class DislikeController implements DislikeControllerI {
     private static dislikeDao: DislikeDao = DislikeDao.getInstance();
     private static dislikeController: DislikeController | null = null
     private static tuitDao: TuitDao = TuitDao.getInstance();
+    private static likeDao: LikeDao = LikeDao.getInstance();
     /**
      * Creates singleton controller instance
      * @param {Express} app Express instance to declare the RESTful Web service
@@ -130,15 +132,18 @@ export default class DislikeController implements DislikeControllerI {
                 .findUserDislikesTuit(userId, tid);
             const howManyDislikedTuit = await DislikeController.dislikeDao
                 .countHowManyDislikedTuit(tid);
+            const howManyLikedTuit = await DislikeController.likeDao
+                .countHowManyLikedTuit(tid);
             let tuit = await DislikeController.tuitDao.findTuitById(tid);
             if (userAlreadyDislikedTuit) {
+                // decrease dislikes, undislike
                 await DislikeController.dislikeDao.userUndislikesTuit(userId, tid);
                 tuit.stats.dislikes = howManyDislikedTuit - 1;
-                tuit.stats.likes += 1;
             } else {
+                // increase dislikes, decrease likes
                 await DislikeController.dislikeDao.userDislikesTuit(userId, tid);
                 tuit.stats.dislikes = howManyDislikedTuit + 1;
-                tuit.stats.likes -= 1;
+                tuit.stats.likes = howManyLikedTuit - 1;
             };
             await DislikeController.tuitDao.updateLikes(tid, tuit.stats);
             res.sendStatus(200);

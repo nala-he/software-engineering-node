@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const DislikeDao_1 = require("../daos/DislikeDao");
 const TuitDao_1 = require("../daos/TuitDao");
+const LikeDao_1 = require("../daos/LikeDao");
 /**
  * @class DislikeController Implements RESTful Web service API for dislikes resource.
  * @implements {DislikeControllerI}
@@ -92,16 +93,19 @@ class DislikeController {
                     .findUserDislikesTuit(userId, tid);
                 const howManyDislikedTuit = yield DislikeController.dislikeDao
                     .countHowManyDislikedTuit(tid);
+                const howManyLikedTuit = yield DislikeController.likeDao
+                    .countHowManyLikedTuit(tid);
                 let tuit = yield DislikeController.tuitDao.findTuitById(tid);
                 if (userAlreadyDislikedTuit) {
+                    // decrease dislikes, undislike
                     yield DislikeController.dislikeDao.userUndislikesTuit(userId, tid);
                     tuit.stats.dislikes = howManyDislikedTuit - 1;
-                    tuit.stats.likes += 1;
                 }
                 else {
+                    // increase dislikes, decrease likes
                     yield DislikeController.dislikeDao.userDislikesTuit(userId, tid);
                     tuit.stats.dislikes = howManyDislikedTuit + 1;
-                    tuit.stats.likes -= 1;
+                    tuit.stats.likes = howManyLikedTuit - 1;
                 }
                 ;
                 yield DislikeController.tuitDao.updateLikes(tid, tuit.stats);
@@ -120,6 +124,7 @@ exports.default = DislikeController;
 DislikeController.dislikeDao = DislikeDao_1.default.getInstance();
 DislikeController.dislikeController = null;
 DislikeController.tuitDao = TuitDao_1.default.getInstance();
+DislikeController.likeDao = LikeDao_1.default.getInstance();
 /**
  * Creates singleton controller instance
  * @param {Express} app Express instance to declare the RESTful Web service
