@@ -114,7 +114,7 @@ class LikeController {
                     // increase likes, decrease dislikes
                     yield LikeController.likeDao.userLikesTuit(userId, tid);
                     tuit.stats.likes = howManyLikedTuit + 1;
-                    tuit.stats.dislikes = howManyDislikedTuit - 1;
+                    tuit.stats.dislikes = (howManyDislikedTuit - 1) < 0 ? 0 : (howManyDislikedTuit - 1);
                 }
                 yield LikeController.tuitDao.updateLikes(tid, tuit.stats);
                 res.sendStatus(200);
