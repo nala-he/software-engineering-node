@@ -24,6 +24,7 @@ const FollowController_1 = require("./controllers/FollowController");
 const BookmarkController_1 = require("./controllers/BookmarkController");
 const MessageController_1 = require("./controllers/MessageController");
 const AuthController_1 = require("./controllers/AuthController");
+const DislikeController_1 = require("./controllers/DislikeController");
 const session = require("express-session");
 const cors = require('cors');
 const app = express();
@@ -68,6 +69,7 @@ const followController = FollowController_1.default.getInstance(app);
 const bookmarkController = BookmarkController_1.default.getInstance(app);
 const messageController = MessageController_1.default.getInstance(app);
 const authenticationController = AuthController_1.default.getInstance(app);
+const dislikeController = DislikeController_1.default.getInstance(app);
 app.get('/', (req, res) => res.send('Welcome to Foundation of Software Engineering!'));
 app.get('/hello', (req, res) => res.send('Hello World!'));
 /**
