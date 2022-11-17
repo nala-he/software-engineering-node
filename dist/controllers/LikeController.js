@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const LikeDao_1 = require("../daos/LikeDao");
 const TuitDao_1 = require("../daos/TuitDao");
+const DislikeDao_1 = require("../daos/DislikeDao");
 /**
  * @class LikeController Implements RESTful Web service API for likes resource.
  * @implements {LikeControllerI}
@@ -101,16 +102,20 @@ class LikeController {
                     .findUserLikesTuit(userId, tid);
                 const howManyLikedTuit = yield LikeController.likeDao
                     .countHowManyLikedTuit(tid);
+                const howManyDislikedTuit = yield LikeController.dislikeDao
+                    .countHowManyDislikedTuit(tid);
                 let tuit = yield LikeController.tuitDao.findTuitById(tid);
                 if (userAlreadyLikedTuit) {
+                    // decrease likes, unlike
                     yield LikeController.likeDao.userUnlikesTuit(userId, tid);
                     tuit.stats.likes = howManyLikedTuit - 1;
                 }
                 else {
+                    // increase likes, decrease dislikes
                     yield LikeController.likeDao.userLikesTuit(userId, tid);
                     tuit.stats.likes = howManyLikedTuit + 1;
+                    tuit.stats.dislikes = howManyDislikedTuit - 1;
                 }
-                ;
                 yield LikeController.tuitDao.updateLikes(tid, tuit.stats);
                 res.sendStatus(200);
             }
@@ -124,6 +129,7 @@ exports.default = LikeController;
 LikeController.likeDao = LikeDao_1.default.getInstance();
 LikeController.likeController = null;
 LikeController.tuitDao = TuitDao_1.default.getInstance();
+LikeController.dislikeDao = DislikeDao_1.default.getInstance();
 /**
  * Creates singleton controller instance
  * @param {Express} app Express instance to declare the RESTful Web service
