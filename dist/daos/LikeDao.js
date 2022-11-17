@@ -40,7 +40,7 @@ class LikeDao {
          * @param tid - Tuit's primary key
          * @Returns Promise To be notified when user is retrieved from the database
          */
-        this.findUserLikesTuit = (uid, tid) => __awaiter(this, void 0, void 0, function* () { return LikeModel_1.default.findOne({ tuit: tid, likedBy: uid }); });
+        this.findUserLikesTuit = (uid, tid) => __awaiter(this, void 0, void 0, function* () { return LikeModel_1.default.findOne({ likedTuit: tid, likedBy: uid }); });
         /**
          * Uses LikeModel to retrieve users documents who liked tuits from likes collection
          * @param {string} tid Tuit's primary key

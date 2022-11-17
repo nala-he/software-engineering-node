@@ -47,7 +47,7 @@ export default class LikeDao implements LikeDaoI {
      * @Returns Promise To be notified when user is retrieved from the database
      */
     findUserLikesTuit = async (uid, tid) =>
-            LikeModel.findOne({tuit: tid, likedBy: uid});
+            LikeModel.findOne({likedTuit: tid, likedBy: uid});
 
     /**
      * Uses LikeModel to retrieve users documents who liked tuits from likes collection

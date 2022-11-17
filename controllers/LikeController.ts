@@ -21,7 +21,11 @@ import TuitController from "./TuitController";
  *     <li>POST /api/users/:uid/likes/:tid to record that a user likes a tuit
  *     </li>
  *     <li>DELETE /api/users/:uid/unlikes/:tid to record that a user
- *     no longer likes a tuit</li>
+ *     no longer likes a tuit
+ *     </li>
+ *     <li>PUT /api/users/:uid/unlikes/:tid to record the like status as
+ *     a user toggles the like button
+ *     </li>
  * </ul>
  * @property {LikeDao} likeDao Singleton DAO implementing likes CRUD operations
  * @property {LikeController} LikeController Singleton controller implementing
@@ -30,9 +34,7 @@ import TuitController from "./TuitController";
 export default class LikeController implements LikeControllerI {
     private static likeDao: LikeDao = LikeDao.getInstance();
     private static likeController: LikeController | null = null
-    // private static tuitDao: TuitDao = TuitDao.getInstance();
-    private static tuitDao: TuitDao;
-
+    private static tuitDao: TuitDao = TuitDao.getInstance();
     /**
      * Creates singleton controller instance
      * @param {Express} app Express instance to declare the RESTful Web service
@@ -40,9 +42,7 @@ export default class LikeController implements LikeControllerI {
      * @param tuitController
      * @return LikeController
      */
-    public static getInstance = (app: Express, tuitController: TuitController): LikeController => {
-        LikeController.tuitDao = tuitController.getTuitDao();
-
+    public static getInstance = (app: Express): LikeController => {
         if(LikeController.likeController === null) {
             LikeController.likeController = new LikeController();
             app.get("/api/users/:uid/likes", LikeController.likeController.findTuitsUserLiked);
@@ -117,6 +117,13 @@ export default class LikeController implements LikeControllerI {
         LikeController.likeDao.userUnlikesTuit(req.params.uid, req.params.tid)
             .then(status => res.json(status));
 
+    /**
+     * @param req Represents request from client, including the
+     * path parameters uid and tid representing the user that is liking
+     * the tuit and the tuit being liked
+     * @param res Represents response to client, including status
+     * on whether like status was successful updated or not
+     */
     userTogglesTuitLikes = async (req, res) => {
         const uid = req.params.uid;
         const tid = req.params.tid;
@@ -128,17 +135,15 @@ export default class LikeController implements LikeControllerI {
                 .findUserLikesTuit(userId, tid);
             const howManyLikedTuit = await LikeController.likeDao
                 .countHowManyLikedTuit(tid);
-
             let tuit = await LikeController.tuitDao.findTuitById(tid);
-            console.log(tuit);
             if (userAlreadyLikedTuit) {
                 await LikeController.likeDao.userUnlikesTuit(userId, tid);
-                tuit.setLikes(howManyLikedTuit - 1);
+                tuit.stats.likes = howManyLikedTuit - 1;
             } else {
                 await LikeController.likeDao.userLikesTuit(userId, tid);
-                tuit.setLikes(howManyLikedTuit + 1);
+                tuit.stats.likes = howManyLikedTuit + 1;
             };
-            await LikeController.tuitDao.updateLikes(tid, tuit.getStats());
+            await LikeController.tuitDao.updateLikes(tid, tuit.stats);
             res.sendStatus(200);
         } catch (e) {
             res.sendStatus(404);
