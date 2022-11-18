@@ -5,8 +5,6 @@ import {Express, Request, Response} from "express";
 import DislikeDao from "../daos/DislikeDao";
 import DislikeControllerI from "../interfaces/DislikeControllerI";
 import TuitDao from "../daos/TuitDao";
-import { ParamsDictionary } from "express-serve-static-core";
-import { ParsedQs } from "qs";
 import LikeDao from "../daos/LikeDao";
 
 /**
@@ -54,7 +52,7 @@ export default class DislikeController implements DislikeControllerI {
                 DislikeController.dislikeController.countHowManyDislikedTuit);
             app.post("/api/users/:uid/dislikes/:tid",
                 DislikeController.dislikeController.userDislikesTuit);
-            app.delete("/api/users/:uid/undislikes/:tid",
+            app.delete("/api/users/:uid/dislikes/:tid",
                 DislikeController.dislikeController.userUndislikesTuit);
             app.put("/api/users/:uid/dislikes/:tid",
                 DislikeController.dislikeController.userTogglesTuitDislikes);

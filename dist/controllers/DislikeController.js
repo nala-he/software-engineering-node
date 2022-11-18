@@ -136,7 +136,7 @@ DislikeController.getInstance = (app) => {
         app.get("/api/users/:uid/dislikes", DislikeController.dislikeController.findTuitsUserDisliked);
         app.get("/api/tuits/:tid/dislikes/count", DislikeController.dislikeController.countHowManyDislikedTuit);
         app.post("/api/users/:uid/dislikes/:tid", DislikeController.dislikeController.userDislikesTuit);
-        app.delete("/api/users/:uid/undislikes/:tid", DislikeController.dislikeController.userUndislikesTuit);
+        app.delete("/api/users/:uid/dislikes/:tid", DislikeController.dislikeController.userUndislikesTuit);
         app.put("/api/users/:uid/dislikes/:tid", DislikeController.dislikeController.userTogglesTuitDislikes);
     }
     return DislikeController.dislikeController;
