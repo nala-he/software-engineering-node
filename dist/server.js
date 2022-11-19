@@ -29,7 +29,7 @@ const session = require("express-session");
 const cors = require('cors');
 const app = express();
 const corsConfig = {
-    origin: 'https://a4-sparkly-macaron-8217a9-fse.netlify.app',
+    origin: ['https://a4-sparkly-macaron-8217a9-fse.netlify.app', 'http://localhost:3000/'],
     credentials: true,
     optionSuccessStatus: 200
 };
