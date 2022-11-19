@@ -56,7 +56,7 @@ if (process.env.ENV === 'PRODUCTION') {
 app.use(session(sess));
 
 app.use(function (request, response, next) {
-    response.header("Access-Control-Allow-Origin", "*");
+    response.header("Access-Control-Allow-Origin", "https://a4-sparkly-macaron-8217a9-fse.netlify.app");
     response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
