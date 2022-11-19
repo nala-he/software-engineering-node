@@ -11,12 +11,16 @@ import User from "./User";
  * @property {Tuit} tuit Tuit being liked
  * @property {User} likedBy User liking the tuit
  */
-export default class Like {
-    private tuit: Tuit;
-    private likedBy: User;
-
-    constructor(tuit: Tuit, likedBy: User) {
-        this.tuit = tuit;
-        this.likedBy = likedBy;
-    }
+export default interface Like {
+    tuit: Tuit;
+    likedBy: User;
 };
+// export default class Like {
+//     private tuit: Tuit;
+//     private likedBy: User;
+//
+//     constructor(tuit: Tuit, likedBy: User) {
+//         this.tuit = tuit;
+//         this.likedBy = likedBy;
+//     }
+// };
