@@ -49,15 +49,12 @@ if (process.env.ENV === 'PRODUCTION') {
     sess.cookie.secure = true;
 }
 app.use(session(sess));
-app.use(function (request, response, next) {
-    response.header("Access-Control-Allow-Origin", "https://a4-sparkly-macaron-8217a9-fse.netlify.app");
-    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
 // build the connection string
 const PROTOCOL = "mongodb+srv";
-const DB_USERNAME = process.env.DB_USERNAME;
-const DB_PASSWORD = process.env.DB_PASSWORD;
+// const DB_USERNAME = process.env.DB_USERNAME;
+// const DB_PASSWORD = process.env.DB_PASSWORD;
+const DB_USERNAME = "fse-nala";
+const DB_PASSWORD = "H6GVmTUTH5KEZNS0";
 const HOST = "cluster0.kndb1tp.mongodb.net";
 const DB_NAME = "fse";
 const DB_QUERY = "retryWrites=true&w=majority";
