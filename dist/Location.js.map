@@ -1,0 +1,1 @@
+{"version":3,"file":"Location.js","sourceRoot":"","sources":["../models/Location.ts"],"names":[],"mappings":";;AAAA;;;;;GAKG;AACH,MAAqB,QAAQ;IAIzB,YAAY,QAAgB,EAAE,SAAiB;QAHvC,aAAQ,GAAW,GAAG,CAAC;QACvB,cAAS,GAAW,GAAG,CAAC;QAG5B,IAAI,CAAC,QAAQ,GAAG,QAAQ,CAAC;QACzB,IAAI,CAAC,SAAS,GAAG,SAAS,CAAC;IAC/B,CAAC;CACJ;AARD,2BAQC;AAAA,CAAC"}

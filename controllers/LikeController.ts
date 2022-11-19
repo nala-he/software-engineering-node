@@ -5,7 +5,8 @@ import {Express, Request, Response} from "express";
 import LikeDao from "../daos/LikeDao";
 import LikeControllerI from "../interfaces/LikeControllerI";
 import TuitDao from "../daos/TuitDao";
-import TuitController from "./TuitController";
+import DislikeController from "./DislikeController";
+import DislikeDao from "../daos/DislikeDao";
 
 /**
  * @class LikeController Implements RESTful Web service API for likes resource.
@@ -35,6 +36,8 @@ export default class LikeController implements LikeControllerI {
     private static likeDao: LikeDao = LikeDao.getInstance();
     private static likeController: LikeController | null = null
     private static tuitDao: TuitDao = TuitDao.getInstance();
+    private static dislikeDao: DislikeDao = DislikeDao.getInstance();
+
     /**
      * Creates singleton controller instance
      * @param {Express} app Express instance to declare the RESTful Web service
@@ -135,20 +138,26 @@ export default class LikeController implements LikeControllerI {
                 .findUserLikesTuit(userId, tid);
             const howManyLikedTuit = await LikeController.likeDao
                 .countHowManyLikedTuit(tid);
+            const howManyDislikedTuit = await LikeController.dislikeDao
+                .countHowManyDislikedTuit(tid);
             let tuit = await LikeController.tuitDao.findTuitById(tid);
+
             if (userAlreadyLikedTuit) {
+                // decrease likes, unlike
                 await LikeController.likeDao.userUnlikesTuit(userId, tid);
                 tuit.stats.likes = howManyLikedTuit - 1;
             } else {
+                // like and increase likes, undislike and decrease dislikes,
                 await LikeController.likeDao.userLikesTuit(userId, tid);
+                await LikeController.dislikeDao.userUndislikesTuit(userId, tid);
                 tuit.stats.likes = howManyLikedTuit + 1;
-            };
+                tuit.stats.dislikes = (howManyDislikedTuit - 1) < 0 ? 0 : (howManyDislikedTuit - 1);
+            }
             await LikeController.tuitDao.updateLikes(tid, tuit.stats);
             res.sendStatus(200);
         } catch (e) {
             res.sendStatus(404);
         }
     }
-
 }
 

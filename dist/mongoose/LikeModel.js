@@ -6,6 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 const mongoose = require('mongoose');
 const LikeSchema_1 = require("./LikeSchema");
-const likeModel = mongoose.model("LikesModel", LikeSchema_1.default);
+const likeModel = mongoose.model("LikeModel", LikeSchema_1.default);
 exports.default = likeModel;
 //# sourceMappingURL=LikeModel.js.map
