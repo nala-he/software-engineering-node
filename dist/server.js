@@ -72,6 +72,7 @@ const authenticationController = AuthController_1.default.getInstance(app);
 const dislikeController = DislikeController_1.default.getInstance(app);
 app.get('/', (req, res) => res.send('Welcome to Foundation of Software Engineering!'));
 app.get('/hello', (req, res) => res.send('Hello World!'));
+app.get('/env', (req, res) => res.send(process.env));
 /**
  * Start a server listening at port 4000 locally
  * but use environment variable PORT on AWS if available.

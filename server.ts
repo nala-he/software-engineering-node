@@ -85,6 +85,8 @@ app.get('/', (req: Request, res: Response) =>
 app.get('/hello', (req: Request, res: Response) =>
     res.send('Hello World!'));
 
+app.get('/env', (req, res) => res.send(process.env));
+
 /**
  * Start a server listening at port 4000 locally
  * but use environment variable PORT on AWS if available.
