@@ -31,8 +31,7 @@ const cors = require('cors');
 const app = express();
 const corsConfig = {
     // origin: 'http://localhost:3000',
-    // origin: 'https://a4-sparkly-macaron-8217a9-fse.netlify.app',
-    origin: true,
+    origin: 'https://a4-sparkly-macaron-8217a9-fse.netlify.app',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
     optionSuccessStatus: 200,
