@@ -26,6 +26,7 @@ import AuthenticationController from "./controllers/AuthController";
 import DislikeController from "./controllers/DislikeController";
 
 const session = require("express-session");
+const MongoStore = require('connect-mongo')(session);
 
 const cors = require('cors')
 const app = express();
@@ -45,10 +46,11 @@ require('dotenv').config();
 let sess = {
     secret: process.env.REACT_APP_API_BASE,
     cookie: {
-        secure: false
+        secure: true
     },
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    store: new MongoStore()
 }
 
 if (process.env.ENV === 'PRODUCTION') {
