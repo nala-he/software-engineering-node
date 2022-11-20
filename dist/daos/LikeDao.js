@@ -32,7 +32,7 @@ class LikeDao {
             return LikeModel_1.default
                 .find({ likedBy: uid })
                 .populate({
-                path: "tuit",
+                path: "likedTuit",
                 populate: {
                     path: "postedBy"
                 }

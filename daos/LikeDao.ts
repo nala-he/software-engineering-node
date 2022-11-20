@@ -38,7 +38,7 @@ export default class LikeDao implements LikeDaoI {
         LikeModel
             .find({likedBy: uid})
             .populate({
-                path: "tuit",
+                path: "likedTuit",
                 populate: {
                     path: "postedBy"
                 }
