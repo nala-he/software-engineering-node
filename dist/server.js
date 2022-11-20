@@ -69,8 +69,8 @@ const bookmarkController = BookmarkController_1.default.getInstance(app);
 const messageController = MessageController_1.default.getInstance(app);
 const authenticationController = AuthController_1.default.getInstance(app);
 const dislikeController = DislikeController_1.default.getInstance(app);
-app.use('/', function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "https://a4-sparkly-macaron-8217a9-fse.netlify.app");
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "https://a4-sparkly-macaron-8217a9-fse.netlify.app/*");
     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, " +
         "Accept, x-client-key, x-client-token, x-client-secret, Authorization");
