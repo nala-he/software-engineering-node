@@ -55,8 +55,10 @@ class LikeController {
                 profile._id : uid;
             LikeController.likeDao.findTuitsUserLiked(userId)
                 .then(likes => {
+                console.log(likes);
                 const likesNonNullTuits = likes.filter(like => like.tuit);
                 const tuitsFromLikes = likesNonNullTuits.map(like => like.tuit);
+                // console.log(tuitsFromLikes);
                 res.json(tuitsFromLikes);
             });
         };

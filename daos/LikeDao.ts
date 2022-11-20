@@ -34,12 +34,11 @@ export default class LikeDao implements LikeDaoI {
      * @returns Promise To be notified when the liked tuits are retrieved from
      * database
      */
-    findTuitsUserLiked = async (uid: string): Promise<Like[]> =>
+    findTuitsUserLiked = async (uid: string): Promise<any> =>
         LikeModel
             .find({likedBy: uid})
-            // .populate('likedTuit', 'tuit')
             .populate({
-                path: "likedTuit",
+                path: "tuit",
                 populate: {
                     path: "postedBy"
                 }
