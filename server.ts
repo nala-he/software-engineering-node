@@ -57,7 +57,7 @@ if (process.env.ENV === 'PRODUCTION') {
 app.use(session(sess));
 
 const helmet = require('helmet');
-app.use(helmet.referrerPolicy({policy: 'same-origin'}));
+app.use(helmet.referrerPolicy({policy: 'origin'}));
 
 // build the connection string
 const PROTOCOL = "mongodb+srv";
