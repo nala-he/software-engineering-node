@@ -30,7 +30,10 @@ const cors = require('cors');
 const app = express();
 const corsConfig = {
     // origin: 'http://localhost:3000',
-    origin: 'https://a4-sparkly-macaron-8217a9-fse.netlify.app',
+    // origin: 'https://a4-sparkly-macaron-8217a9-fse.netlify.app',
+    origin: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: true,
     credentials: true,
     optionSuccessStatus: 200,
 };
@@ -69,13 +72,6 @@ const bookmarkController = BookmarkController_1.default.getInstance(app);
 const messageController = MessageController_1.default.getInstance(app);
 const authenticationController = AuthController_1.default.getInstance(app);
 const dislikeController = DislikeController_1.default.getInstance(app);
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "https://a4-sparkly-macaron-8217a9-fse.netlify.app/*");
-    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, " +
-        "Accept, x-client-key, x-client-token, x-client-secret, Authorization");
-    next();
-});
 app.get('/', (req, res) => res.send('Welcome to Foundation of Software Engineering!'));
 app.get('/hello', (req, res) => res.send('Hello World!'));
 app.get('/env', (req, res) => res.send(process.env));
