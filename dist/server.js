@@ -50,6 +50,8 @@ if (process.env.ENV === 'PRODUCTION') {
     sess.cookie.secure = true;
 }
 app.use(session(sess));
+const helmet = require('helmet');
+app.use(helmet.referrerPolicy({ policy: 'same-origin' }));
 // build the connection string
 const PROTOCOL = "mongodb+srv";
 const DB_USERNAME = process.env.DB_USERNAME;
