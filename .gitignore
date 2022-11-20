@@ -12,3 +12,5 @@ coverage
 !.elasticbeanstalk/*.global.yml
 
 data_dump
+
+.env

@@ -46,7 +46,7 @@ require('dotenv').config();
 let sess = {
     secret: process.env.REACT_APP_API_BASE,
     cookie: {
-        secure: true
+        secure: false
     },
     resave: false,
     saveUninitialized: true,
