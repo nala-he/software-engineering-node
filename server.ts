@@ -34,7 +34,6 @@ const corsConfig = {
     // origin: 'https://a4-sparkly-macaron-8217a9-fse.netlify.app',
     origin: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    preflightContinue: true,
     credentials: true,
     optionSuccessStatus: 200,
 };
@@ -88,8 +87,6 @@ app.get('/', (req: Request, res: Response) =>
 
 app.get('/hello', (req: Request, res: Response) =>
     res.send('Hello World!'));
-
-app.get('/env', (req, res) => res.send(process.env));
 
 /**
  * Start a server listening at port 4000 locally
