@@ -35,10 +35,15 @@ export default class DislikeDao implements DislikeDaoI {
      * @returns Promise To be notified when the disliked tuits are retrieved from
      * database
      */
-    findTuitsUserDisliked = async (uid: string): Promise<Dislike[]> =>
+    findTuitsUserDisliked = async (uid: string) =>
         DislikeModel
             .find({dislikedBy: uid})
-            .populate('dislikedTuit', 'tuit')
+            .populate({
+                path: 'dislikedTuit',
+                populate: {
+                    path: 'postedBy'
+                }
+            })
             .exec();
 
     /**
