@@ -26,7 +26,7 @@ import AuthenticationController from "./controllers/AuthController";
 import DislikeController from "./controllers/DislikeController";
 
 const session = require("express-session");
-const MongoStore = require('connect-mongo')(session);
+const MongoStore = require("connect-mongodb-session")(session);
 
 const cors = require('cors')
 const app = express();
