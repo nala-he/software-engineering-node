@@ -50,8 +50,6 @@ if (process.env.ENV === 'PRODUCTION') {
     sess.cookie.secure = true;
 }
 app.use(session(sess));
-const helmet = require('helmet');
-app.use(helmet.referrerPolicy({ policy: 'origin' }));
 // build the connection string
 const PROTOCOL = "mongodb+srv";
 const DB_USERNAME = process.env.DB_USERNAME;
@@ -71,6 +69,11 @@ const bookmarkController = BookmarkController_1.default.getInstance(app);
 const messageController = MessageController_1.default.getInstance(app);
 const authenticationController = AuthController_1.default.getInstance(app);
 const dislikeController = DislikeController_1.default.getInstance(app);
+app.all('/', function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "https://a4-sparkly-macaron-8217a9-fse.netlify.app");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+});
 app.get('/', (req, res) => res.send('Welcome to Foundation of Software Engineering!'));
 app.get('/hello', (req, res) => res.send('Hello World!'));
 app.get('/env', (req, res) => res.send(process.env));
