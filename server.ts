@@ -61,18 +61,20 @@ if (process.env.ENV === 'PRODUCTION') {
 app.use(session(sess));
 
 // build the connection string
-const PROTOCOL = "mongodb+srv";
-
-const DB_USERNAME = process.env.DB_USERNAME;
-const DB_PASSWORD = process.env.DB_PASSWORD;
-
-const HOST = "cluster0.kndb1tp.mongodb.net";
-const DB_NAME = "fse";
-const DB_QUERY = "retryWrites=true&w=majority";
-
-const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}`;
+// const PROTOCOL = "mongodb+srv";
+//
+// const DB_USERNAME = process.env.DB_USERNAME;
+// const DB_PASSWORD = process.env.DB_PASSWORD;
+//
+// const HOST = "cluster0.kndb1tp.mongodb.net";
+// const DB_NAME = "fse";
+// const DB_QUERY = "retryWrites=true&w=majority";
+// const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}`;
 // connect to the database
-mongoose.connect(connectionString)
+// mongoose.connect(connectionString)
+const CONNECTION_STRING = process.env.DB_CONNECTION_STRING
+    || 'mongodb://localhost:27017/api';
+mongoose.connect(CONNECTION_STRING)
 
 //create RESTful Web service API
 const userController = UserController.getInstance(app);
