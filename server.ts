@@ -35,8 +35,7 @@ const corsConfig = {
         'https://a4-sparkly-macaron-8217a9-fse.netlify.app/',
         'http://localhost:3000'],
     methods: ['GET','HEAD','PUT','PATCH','POST','DELETE'],
-    credentials: true,
-    preflightContinue: true,
+    credentials: false,
     optionSuccessStatus: 200,
 };
 app.use(cors(corsConfig));
