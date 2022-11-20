@@ -80,7 +80,7 @@ const messageController = MessageController.getInstance(app);
 const authenticationController = AuthenticationController.getInstance(app);
 const dislikeController = DislikeController.getInstance(app);
 
-app.all('/', function(req, res, next) {
+app.use('/', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "https://a4-sparkly-macaron-8217a9-fse.netlify.app");
     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, " +
