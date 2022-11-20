@@ -26,7 +26,7 @@ import AuthenticationController from "./controllers/AuthController";
 import DislikeController from "./controllers/DislikeController";
 
 const session = require("express-session");
-const MongoStore = require("connect-mongodb-session")(session);
+const MongoStore = require("connect-mongo");
 
 const cors = require('cors')
 const app = express();
@@ -43,6 +43,9 @@ app.use(express.json());
 
 require('dotenv').config();
 
+const CONNECTION_STRING = process.env.DB_CONNECTION_STRING;
+mongoose.connect(CONNECTION_STRING)
+
 let sess = {
     secret: process.env.REACT_APP_API_BASE,
     cookie: {
@@ -50,7 +53,9 @@ let sess = {
     },
     resave: false,
     saveUninitialized: true,
-    store: new MongoStore()
+    store: MongoStore.create({
+        mongoUrl: CONNECTION_STRING
+    })
 }
 
 if (process.env.ENV === 'PRODUCTION') {
@@ -72,9 +77,7 @@ app.use(session(sess));
 // const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}`;
 // connect to the database
 // mongoose.connect(connectionString)
-const CONNECTION_STRING = process.env.DB_CONNECTION_STRING
-    || 'mongodb://localhost:27017/api';
-mongoose.connect(CONNECTION_STRING)
+
 
 //create RESTful Web service API
 const userController = UserController.getInstance(app);
