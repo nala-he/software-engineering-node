@@ -30,7 +30,7 @@ const MongoStore = require("connect-mongo");
 const cors = require('cors');
 const app = express();
 const corsConfig = {
-    origin: ['https://a4-sparkly-macaron-8217a9-fse.netlify.app', 'http://localhost:3000'],
+    origin: ['https://a4-whimsical-capybara-0d1060-heroku.netlify.app', 'http://localhost:3000'],
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
     credentials: true,
     optionSuccessStatus: 200,
